@@ -1,0 +1,21 @@
+<?php
+
+Breadcrumbs::for('dashboard.{{lowercasePlural}}.index', function ($breadcrumb) {
+    $breadcrumb->parent('dashboard.home');
+    $breadcrumb->push(trans('{{lowercasePlural}}.plural'), route('dashboard.{{lowercasePlural}}.index'));
+});
+
+Breadcrumbs::for('dashboard.{{lowercasePlural}}.create', function ($breadcrumb) {
+    $breadcrumb->parent('dashboard.{{lowercasePlural}}.index');
+    $breadcrumb->push(trans('{{lowercasePlural}}.actions.create'), route('dashboard.{{lowercasePlural}}.create'));
+});
+
+Breadcrumbs::for('dashboard.{{lowercasePlural}}.show', function ($breadcrumb, ${{lowercaseSingular}}) {
+    $breadcrumb->parent('dashboard.{{lowercasePlural}}.index');
+    $breadcrumb->push(${{lowercaseSingular}}->name, route('dashboard.{{lowercasePlural}}.show', ${{lowercaseSingular}}));
+});
+
+Breadcrumbs::for('dashboard.{{lowercasePlural}}.edit', function ($breadcrumb, ${{lowercaseSingular}}) {
+    $breadcrumb->parent('dashboard.{{lowercasePlural}}.show', ${{lowercaseSingular}});
+    $breadcrumb->push(trans('{{lowercasePlural}}.actions.edit'), route('dashboard.{{lowercasePlural}}.edit', ${{lowercaseSingular}}));
+});

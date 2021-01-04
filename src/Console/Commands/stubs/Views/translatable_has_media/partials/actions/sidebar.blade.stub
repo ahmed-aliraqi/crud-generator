@@ -1,0 +1,22 @@
+@component('dashboard::components.sidebarItem')
+    @slot('can', ['ability' => 'viewAny', 'model' => \App\Models\{{studlySingular}}::class])
+    @slot('url', route('dashboard.{{lowercasePlural}}.index'))
+    @slot('name', trans('{{lowercasePlural}}.plural'))
+    @slot('active', request()->routeIs('*{{lowercasePlural}}*'))
+    @slot('icon', 'fas fa-th')
+    @slot('tree', [
+        [
+            'name' => trans('{{lowercasePlural}}.actions.list'),
+            'url' => route('dashboard.{{lowercasePlural}}.index'),
+            'can' => ['ability' => 'viewAny', 'model' => \App\Models\{{studlySingular}}::class],
+            'active' => request()->routeIs('*{{lowercasePlural}}.index')
+            || request()->routeIs('*{{lowercasePlural}}.show'),
+        ],
+        [
+            'name' => trans('{{lowercasePlural}}.actions.create'),
+            'url' => route('dashboard.{{lowercasePlural}}.create'),
+            'can' => ['ability' => 'create', 'model' => \App\Models\{{studlySingular}}::class],
+            'active' => request()->routeIs('*{{lowercasePlural}}.create'),
+        ],
+    ])
+@endcomponent

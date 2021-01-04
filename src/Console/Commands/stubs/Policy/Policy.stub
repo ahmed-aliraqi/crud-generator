@@ -1,0 +1,70 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\User;
+use App\Models\{{studlySingular}};
+use Illuminate\Auth\Access\HandlesAuthorization;
+
+class {{studlySingular}}Policy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can view any {{lowercaseDisplayPlural}}.
+     *
+     * @param \App\Models\User|null $user
+     * @return mixed
+     */
+    public function viewAny(User $user)
+    {
+        return $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can view the {{lowercaseDisplaySingular}}.
+     *
+     * @param \App\Models\User|null $user
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @return mixed
+     */
+    public function view(User $user, {{studlySingular}} ${{lowercaseSingular}})
+    {
+        return $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can create {{lowercaseDisplayPlural}}.
+     *
+     * @param \App\Models\User $user
+     * @return mixed
+     */
+    public function create(User $user)
+    {
+        return $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can update the {{lowercaseDisplaySingular}}.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @return mixed
+     */
+    public function update(User $user, {{studlySingular}} ${{lowercaseSingular}})
+    {
+        return $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can delete the {{lowercaseDisplaySingular}}.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @return mixed
+     */
+    public function delete(User $user, {{studlySingular}} ${{lowercaseSingular}})
+    {
+        return $user->isAdmin();
+    }
+}

@@ -1,0 +1,40 @@
+<?php
+
+return [
+    'singular' => '{{singular}}',
+    'plural' => '{{plural}}',
+    'empty' => '{{empty}}',
+    'count' => '{{count}}',
+    'search' => '{{search}}',
+    'select' => '{{select}}',
+    'perPage' => '{{perPage}}',
+    'filter' => '{{filter}}',
+    'actions' => [
+        'list' => '{{actions.list}}',
+        'create' => '{{actions.create}}',
+        'show' => '{{actions.show}}',
+        'edit' => '{{actions.edit}}',
+        'delete' => '{{actions.delete}}',
+        'options' => '{{actions.options}}',
+        'save' => '{{actions.save}}',
+        'filter' => '{{actions.filter}}',
+    ],
+    'messages' => [
+        'created' => '{{messages.created}}',
+        'updated' => '{{messages.updated}}',
+        'deleted' => '{{messages.deleted}}',
+    ],
+    'attributes' => [
+        'name' => '{{attributes.name}}',
+        '%name%' => '{{attributes.%name%}}',
+        'image' => '{{attributes.image}}',
+    ],
+    'dialogs' => [
+        'delete' => [
+            'title' => '{{dialogs.delete.title}}',
+            'info' => '{{dialogs.delete.info}}',
+            'confirm' => '{{dialogs.delete.confirm}}',
+            'cancel' => '{{dialogs.delete.cancel}}',
+        ],
+    ],
+];

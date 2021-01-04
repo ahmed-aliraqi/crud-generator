@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Http\Controllers\{{studlyPlural}}\Api;
+
+use App\Models\{{studlySingular}};
+use Illuminate\Routing\Controller;
+use App\Http\Resources\{{studlyPlural}}\{{studlySingular}}Resource;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+class {{studlySingular}}Controller extends Controller
+{
+    use AuthorizesRequests, ValidatesRequests;
+
+    /**
+     * Display a listing of the {{lowercasePlural}}.
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function index()
+    {
+        ${{lowercasePlural}} = {{studlySingular}}::filter()->paginate();
+
+        return {{studlySingular}}Resource::collection(${{lowercasePlural}});
+    }
+
+    /**
+     * Display the specified {{lowercaseSingular}}.
+     *
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @return \App\Http\Resources\{{studlyPlural}}\{{studlySingular}}Resource
+     */
+    public function show({{studlySingular}} ${{lowercaseSingular}})
+    {
+        return new {{studlySingular}}Resource(${{lowercaseSingular}});
+    }
+}

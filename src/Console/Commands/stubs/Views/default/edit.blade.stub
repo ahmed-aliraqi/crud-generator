@@ -1,0 +1,13 @@
+<x-layout :title="${{lowercaseSingular}}->name" :breadcrumbs="['dashboard.{{lowercasePlural}}.edit', ${{lowercaseSingular}}]">
+    {{ BsForm::resource('{{lowercasePlural}}')->putModel(${{lowercaseSingular}}, route('dashboard.{{lowercasePlural}}.update', ${{lowercaseSingular}})) }}
+    @component('dashboard::components.box')
+        @slot('title', trans('{{lowercasePlural}}.actions.edit'))
+
+        @include('dashboard.{{lowercasePlural}}.partials.form')
+
+        @slot('footer')
+            {{ BsForm::submit()->label(trans('{{lowercasePlural}}.actions.save')) }}
+        @endslot
+    @endcomponent
+    {{ BsForm::close() }}
+</x-layout>

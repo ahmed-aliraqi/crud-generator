@@ -1,0 +1,10 @@
+@include('dashboard.errors')
+
+{{ BsForm::text('name') }}
+
+@isset(${{lowercaseSingular}})
+    {{ BsForm::image('image')->files(${{lowercaseSingular}}->getMediaResource()) }}
+@else
+    {{ BsForm::image('image') }}
+@endisset
+

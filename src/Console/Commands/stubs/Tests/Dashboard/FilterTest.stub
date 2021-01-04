@@ -1,0 +1,34 @@
+<?php
+
+namespace Tests\Feature\{{studlyPlural}}\Dashboard;
+
+use Tests\TestCase;
+use App\Models\{{studlySingular}};
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class {{studlySingular}}FilterTest extends TestCase
+{
+    use RefreshDatabase;
+
+    /** @test */
+    public function it_can_filter_{{lowercasePlural}}_by_name()
+    {
+        $this->actingAsAdmin();
+
+        {{studlySingular}}::factory()->create([
+            'name' => 'Foo',
+        ]);
+
+        {{studlySingular}}::factory()->create([
+            'name' => 'Bar',
+        ]);
+
+        $this->get(route('dashboard.{{lowercasePlural}}.index', [
+            'name' => 'Fo',
+        ]))
+            ->assertSuccessful()
+            ->assertSee(trans('{{lowercasePlural}}.filter'))
+            ->assertSee('Foo')
+            ->assertDontSee('Bar');
+    }
+}

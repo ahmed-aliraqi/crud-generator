@@ -1,0 +1,41 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class Create{{studlyPlural}}Table extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('{{lowercasePlural}}', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+        });
+
+        Schema::create('{{lowercaseSingular}}_translations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('{{lowercaseSingular}}_id');
+            $table->string('name')->nullable();
+            $table->string('locale')->index();
+            $table->unique(['{{lowercaseSingular}}_id', 'locale']);
+            $table->foreign('{{lowercaseSingular}}_id')->references('id')->on('{{lowercasePlural}}')->cascadeOnDelete();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('{{lowercaseSingular}}_translations');
+        Schema::dropIfExists('{{lowercasePlural}}');
+    }
+}

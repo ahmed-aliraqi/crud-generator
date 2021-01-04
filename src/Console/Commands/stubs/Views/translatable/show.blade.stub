@@ -1,0 +1,24 @@
+<x-layout :title="${{lowercaseSingular}}->name" :breadcrumbs="['dashboard.{{lowercasePlural}}.show', ${{lowercaseSingular}}]">
+    <div class="row">
+        <div class="col-md-6">
+            @component('dashboard::components.box')
+                @slot('class', 'p-0')
+                @slot('bodyClass', 'p-0')
+
+                <table class="table table-striped table-middle">
+                    <tbody>
+                    <tr>
+                        <th width="200">@lang('{{lowercasePlural}}.attributes.name')</th>
+                        <td>{{ ${{lowercaseSingular}}->name }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                @slot('footer')
+                    @include('dashboard.{{lowercasePlural}}.partials.actions.edit')
+                    @include('dashboard.{{lowercasePlural}}.partials.actions.delete')
+                @endslot
+            @endcomponent
+        </div>
+    </div>
+</x-layout>

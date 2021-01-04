@@ -1,0 +1,13 @@
+<x-layout :title="trans('{{lowercasePlural}}.actions.create')" :breadcrumbs="['dashboard.{{lowercasePlural}}.create']">
+    {{ BsForm::resource('{{lowercasePlural}}')->post(route('dashboard.{{lowercasePlural}}.store')) }}
+    @component('dashboard::components.box')
+        @slot('title', trans('{{lowercasePlural}}.actions.create'))
+
+        @include('dashboard.{{lowercasePlural}}.partials.form')
+
+        @slot('footer')
+            {{ BsForm::submit()->label(trans('{{lowercasePlural}}.actions.save')) }}
+        @endslot
+    @endcomponent
+    {{ BsForm::close() }}
+</x-layout>
