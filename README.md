@@ -27,7 +27,7 @@ You should add config file using the following command to configure the supporte
 php artisan vendor:publish --provider="AhmedAliraqi\CrudGenerator\CrudServiceProvider"
 ```
 
-Then add the following comment line in the `routes/dashboard.php` file:
+Then add the following comment line in the `routes/dashboard.php` and `routes/api.php` files:
 ```php
 /*  The routes of generated crud will set here: Don't remove this line  */
 ```
