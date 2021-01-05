@@ -19,7 +19,7 @@ class {{studlySingular}}Controller extends Controller
      */
     public function index()
     {
-        ${{lowercasePlural}} = {{studlySingular}}::filter()->paginate();
+        ${{lowercasePlural}} = {{studlySingular}}::filter()->simplePaginate();
 
         return {{studlySingular}}Resource::collection(${{lowercasePlural}});
     }

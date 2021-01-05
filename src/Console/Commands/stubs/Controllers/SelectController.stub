@@ -17,7 +17,7 @@ class SelectController extends Controller
      */
     public function index(SelectFilter $filter)
     {
-        ${{lowercasePlural}} = {{studlySingular}}::filter($filter)->paginate();
+        ${{lowercasePlural}} = {{studlySingular}}::filter($filter)->simplePaginate();
 
         return SelectResource::collection(${{lowercasePlural}});
     }
