@@ -11,14 +11,14 @@
                         <th width="200">@lang('{{lowercasePlural}}.attributes.name')</th>
                         <td>{{ ${{lowercaseSingular}}->name }}</td>
                     </tr>
-                    <tr>
-                      <th width="200">@lang('{{lowercasePlural}}.attributes.image')</th>
-                      <td>
-                        <img src="{{ ${{lowercaseSingular}}->getFirstMediaUrl() }}"
-                             class="img img-size-64 mw-100"
-                             alt="{{ ${{lowercaseSingular}}->name }}">
-                      </td>
-                    </tr>
+                    @if(${{lowercaseSingular}}->getFirstMedia())
+                        <tr>
+                            <th width="200">@lang('{{lowercasePlural}}.attributes.image')</th>
+                            <td>
+                                <file-preview :media="{{ ${{lowercaseSingular}}->getMediaResource() }}"></file-preview>
+                            </td>
+                        </tr>
+                    @endif
                     </tbody>
                 </table>
 

@@ -2,7 +2,9 @@
     @include('dashboard.{{lowercasePlural}}.partials.filter')
 
     @component('dashboard::components.table-box')
-        @slot('title', trans('{{lowercasePlural}}.actions.list'))
+        @slot('title')
+            @lang('{{lowercasePlural}}.actions.list') ({{ ${{lowercasePlural}}->total() }})
+        @endslot
 
         <thead>
         <tr>
