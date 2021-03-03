@@ -52,7 +52,9 @@ class {{studlySingular}}Test extends TestCase
 
         $response = $this->post(
             route('dashboard.{{lowercasePlural}}.store'),
-            ['name' => 'Foo']
+            {{studlySingular}}::factory()->raw([
+                'name' => 'Foo'
+            ])
         );
 
         $response->assertRedirect();
@@ -84,7 +86,9 @@ class {{studlySingular}}Test extends TestCase
 
         $response = $this->put(
             route('dashboard.{{lowercasePlural}}.update', ${{lowercaseSingular}}),
-            ['name' => 'Foo']
+            {{studlySingular}}::factory()->raw([
+                'name' => 'Foo'
+            ])
         );
 
         ${{lowercaseSingular}}->refresh();
