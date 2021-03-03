@@ -33,7 +33,7 @@
                        class="text-decoration-none text-ellipsis">
 
                         <img src="{{ ${{lowercaseSingular}}->getFirstMediaUrl() }}"
-                             alt="Product 1"
+                             alt="Image"
                              class="img-circle img-size-32 mr-2" style="height: 32px;">
                         {{ ${{lowercaseSingular}}->name }}
                     </a>
