@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Http\Filters\Filterable;
 use Spatie\MediaLibrary\HasMedia;
 use App\Support\Traits\Selectable;
-use App\Http\Filters\{{studlyPlural}}\{{studlySingular}}Filter;
+use App\Http\Filters\{{studlySingular}}Filter;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Translatable;
 use Spatie\MediaLibrary\InteractsWithMedia;

@@ -29,7 +29,7 @@ class {{studlySingular}}Controller extends Controller
      * Display the specified {{lowercaseSingular}}.
      *
      * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
-     * @return \App\Http\Resources\{{studlyPlural}}\{{studlySingular}}Resource
+     * @return \App\Http\Resources\{{studlySingular}}Resource
      */
     public function show({{studlySingular}} ${{lowercaseSingular}})
     {

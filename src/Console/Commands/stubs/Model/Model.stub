@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Http\Filters\Filterable;
 use App\Support\Traits\Selectable;
-use App\Http\Filters\{{studlyPlural}}\{{studlySingular}}Filter;
+use App\Http\Filters\{{studlySingular}}Filter;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 

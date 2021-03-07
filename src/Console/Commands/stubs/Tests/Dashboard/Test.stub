@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\{{studlyPlural}}\Dashboard;
+namespace Tests\Feature\Dashboard;
 
 use Tests\TestCase;
 use App\Models\{{studlySingular}};
@@ -112,5 +112,27 @@ class {{studlySingular}}Test extends TestCase
         $response->assertRedirect();
 
         $this->assertEquals({{studlySingular}}::count(), ${{lowercasePlural}}Count - 1);
+    }
+
+    /** @test */
+    public function it_can_filter_{{lowercasePlural}}_by_name()
+    {
+        $this->actingAsAdmin();
+
+        {{studlySingular}}::factory()->create([
+            'name' => 'Foo',
+        ]);
+
+        {{studlySingular}}::factory()->create([
+            'name' => 'Bar',
+        ]);
+
+        $this->get(route('dashboard.{{lowercasePlural}}.index', [
+            'name' => 'Fo',
+        ]))
+            ->assertSuccessful()
+            ->assertSee(trans('{{lowercasePlural}}.filter'))
+            ->assertSee('Foo')
+            ->assertDontSee('Bar');
     }
 }

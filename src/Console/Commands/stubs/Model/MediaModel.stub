@@ -7,7 +7,7 @@ use Spatie\MediaLibrary\HasMedia;
 use App\Support\Traits\Selectable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use App\Http\Filters\{{studlyPlural}}\{{studlySingular}}Filter;
+use App\Http\Filters\{{studlySingular}}Filter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
 

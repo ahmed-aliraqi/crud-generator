@@ -21,18 +21,10 @@ class Test extends CrudGenerator
             : __DIR__.'/../stubs/Tests/Dashboard/Test.stub';
 
         static::put(
-            base_path("tests/Feature/{$dir}/Api"),
+            base_path("tests/Feature/Api"),
             $name.'Test.php',
             self::qualifyContent(
                 __DIR__.'/../stubs/Tests/Api/Test.stub',
-                $name
-            )
-        );
-        static::put(
-            base_path("tests/Feature/{$dir}/Dashboard"),
-            $name.'FilterTest.php',
-            self::qualifyContent(
-                __DIR__.'/../stubs/Tests/Dashboard/FilterTest.stub',
                 $name
             )
         );

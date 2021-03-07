@@ -45,7 +45,7 @@ class {{studlySingular}}Controller extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\{{studlySingular}}Request $request
+     * @param \App\Http\Requests\Dashboard\{{studlySingular}}Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store({{studlySingular}}Request $request)

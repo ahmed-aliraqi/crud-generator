@@ -17,7 +17,7 @@ class {{studlySingular}}Test extends TestCase
 
         {{studlySingular}}::factory()->count(2)->create();
 
-        $this->getJson(route('{{lowercasePlural}}.index'))
+        $this->getJson(route('api.{{lowercasePlural}}.index'))
             ->assertSuccessful()
             ->assertJsonStructure([
                 'data' => [

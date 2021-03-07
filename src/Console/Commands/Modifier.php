@@ -18,14 +18,12 @@ class Modifier
 
         $api = file_get_contents(base_path('routes/api.php'));
 
-        $controllerNamespace = Str::of($name)->plural()->studly();
-
         $controllerName = Str::of($name)->singular()->studly().'Controller';
 
         $resource = Str::of($name)->plural()->snake();
 
-        $dashboardRoute = "Route::resource('$resource', '{$controllerNamespace}\Dashboard\\$controllerName');\n$place";
-        $apiRoutes = "Route::apiResource('$resource', '{$controllerNamespace}\Api\\$controllerName');\nRoute::get('/select/$resource', '{$controllerNamespace}\SelectController@index')->name('{$resource}.select');\n$place";
+        $dashboardRoute = "Route::resource('$resource', '$controllerName');\n$place";
+        $apiRoutes = "Route::apiResource('$resource', '$controllerName');\nRoute::get('/select/$resource', '$controllerName@select')->name('{$resource}.select');\n$place";
 
         $dashboard = preg_replace("/$pattern/", $dashboardRoute, $dashboard);
 
