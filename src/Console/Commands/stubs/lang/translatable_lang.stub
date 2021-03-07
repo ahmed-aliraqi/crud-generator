@@ -7,6 +7,7 @@ return [
     'count' => '{{count}}',
     'search' => '{{search}}',
     'select' => '{{select}}',
+    'permission' => '{{permission}}',
     'perPage' => '{{perPage}}',
     'filter' => '{{filter}}',
     'actions' => [

@@ -3,8 +3,7 @@
 namespace AhmedAliraqi\CrudGenerator\Console\Commands;
 
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Artisan;
+use Spatie\Permission\Models\Permission;
 
 class Modifier
 {
@@ -49,5 +48,39 @@ class Modifier
         $sidebarFile = preg_replace("/$pattern/", $sidebar, $sidebarFile);
 
         file_put_contents(resource_path('views/layouts/sidebar.blade.php'), $sidebarFile);
+    }
+
+    public function permission($name)
+    {
+        $resource = Str::of($name)->plural()->snake();
+
+        // Reset cached roles and permissions
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+
+        // create permissions
+        Permission::updateOrCreate(['name' => "manage.$resource"]);
+
+        $permissions = @json_decode(file_get_contents(storage_path('permissions.json'))) ?? [];
+
+        $permissions[] = "manage.$resource";
+
+        file_put_contents(storage_path('permissions.json'), json_encode($permissions, JSON_PRETTY_PRINT));
+    }
+
+    public function seeder($name)
+    {
+        $resource = Str::of($name)->singular()->studly();
+
+        $pattern = '\/\*  The seeders of generated crud will set here: Don\'t remove this line  \*\/';
+
+        $place = '/*  The seeders of generated crud will set here: Don\'t remove this line  */';
+
+        $seederFile = file_get_contents(database_path('seeds/DummyDataSeeder.php'));
+
+        $seeder = "\$this->call({$resource}Seeder::class);\n$place";
+
+        $seederFile = preg_replace("/$pattern/", $seeder, $seederFile);
+
+        file_put_contents(database_path('seeds/DummyDataSeeder.php'), $seederFile);
     }
 }

@@ -18,7 +18,7 @@ class {{studlySingular}}Policy
      */
     public function viewAny(User $user)
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}');
     }
 
     /**
@@ -30,7 +30,7 @@ class {{studlySingular}}Policy
      */
     public function view(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}');
     }
 
     /**
@@ -41,7 +41,7 @@ class {{studlySingular}}Policy
      */
     public function create(User $user)
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}');
     }
 
     /**
@@ -53,7 +53,7 @@ class {{studlySingular}}Policy
      */
     public function update(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}');
     }
 
     /**
@@ -65,6 +65,6 @@ class {{studlySingular}}Policy
      */
     public function delete(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return $user->isAdmin();
+        return $user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}');
     }
 }

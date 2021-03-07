@@ -30,7 +30,7 @@ class Test extends CrudGenerator
         );
 
         static::put(
-            base_path("tests/Feature/{$dir}/Dashboard"),
+            base_path("tests/Feature/Dashboard"),
             $name.'Test.php',
             self::qualifyContent($path, $name)
         );
