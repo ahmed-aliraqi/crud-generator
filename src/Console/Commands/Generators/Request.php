@@ -21,7 +21,7 @@ class Request extends CrudGenerator
             : __DIR__.'/../stubs/Requests/Request.stub';
 
         static::put(
-            app_path("Http/Requests/{$namespace}"),
+            app_path("Http/Requests"),
             $name.'Request.php',
             self::qualifyContent(
                 $stub,

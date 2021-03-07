@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\{{studlyPlural}}\Api;
+namespace App\Http\Controllers\Api;
 
 use App\Models\{{studlySingular}};
 use Illuminate\Routing\Controller;
-use App\Http\Resources\{{studlyPlural}}\{{studlySingular}}Resource;
+use App\Http\Resources\SelectResource;
+use App\Http\Resources\{{studlySingular}}Resource;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -33,5 +34,17 @@ class {{studlySingular}}Controller extends Controller
     public function show({{studlySingular}} ${{lowercaseSingular}})
     {
         return new {{studlySingular}}Resource(${{lowercaseSingular}});
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     */
+    public function select()
+    {
+        ${{lowercasePlural}} = {{studlySingular}}::filter()->simplePaginate();
+
+        return SelectResource::collection(${{lowercasePlural}});
     }
 }

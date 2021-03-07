@@ -18,24 +18,11 @@ class Resource extends CrudGenerator
 
         $stub = __DIR__.'/../stubs/Resources/Resource.stub';
 
-        $selectStub = $hasMedia
-            ? __DIR__.'/../stubs/Resources/MediaSelectResource.stub'
-            : __DIR__.'/../stubs/Resources/SelectResource.stub';
-
         static::put(
-            app_path("Http/Resources/".$namespace),
+            app_path("Http/Resources"),
             $name.'Resource.php',
             self::qualifyContent(
                 $stub,
-                $name
-            )
-        );
-
-        static::put(
-            app_path("Http/Resources/".$namespace),
-            'SelectResource.php',
-            self::qualifyContent(
-                $selectStub,
                 $name
             )
         );

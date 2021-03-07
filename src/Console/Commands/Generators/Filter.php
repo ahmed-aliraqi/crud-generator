@@ -20,24 +20,11 @@ class Filter extends CrudGenerator
             ? __DIR__.'/../stubs/Filters/TranslatableFilter.stub'
             : __DIR__.'/../stubs/Filters/Filter.stub';
 
-        $selectStub = $translatable
-            ? __DIR__.'/../stubs/Filters/TranslatableSelectFilter.stub'
-            : __DIR__.'/../stubs/Filters/SelectFilter.stub';
-
         static::put(
-            app_path("Http/Filters/{$namespace}"),
+            app_path("Http/Filters"),
             $name.'Filter.php',
             self::qualifyContent(
                 $filterStub,
-                $name
-            )
-        );
-
-        static::put(
-            app_path("Http/Filters/{$namespace}"),
-            'SelectFilter.php',
-            self::qualifyContent(
-                $selectStub,
                 $name
             )
         );

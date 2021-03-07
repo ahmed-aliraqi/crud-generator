@@ -16,19 +16,9 @@ class Controller extends CrudGenerator
 
         $hasMedia = $command->option('has-media');
 
-        // SelectController
-        static::put(
-            app_path("Http/Controllers/{$namespace}"),
-            'SelectController.php',
-            self::qualifyContent(
-                __DIR__.'/../stubs/Controllers/SelectController.stub',
-                $name
-            )
-        );
-
         // ApiController
         static::put(
-            app_path("Http/Controllers/{$namespace}/Api"),
+            app_path("Http/Controllers/Api"),
             $name.'Controller.php',
             self::qualifyContent(
                 __DIR__.'/../stubs/Controllers/Api/Controller.stub',
@@ -42,7 +32,7 @@ class Controller extends CrudGenerator
 
         // DashboardController
         static::put(
-            app_path("Http/Controllers/{$namespace}/Dashboard"),
+            app_path("Http/Controllers/Dashboard"),
             $name.'Controller.php',
             self::qualifyContent(
                 $stub,

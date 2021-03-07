@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\{{studlyPlural}}\Dashboard;
+namespace App\Http\Controllers\Dashboard;
 
 use App\Models\{{studlySingular}};
 use Illuminate\Routing\Controller;
-use App\Http\Requests\{{studlyPlural}}\{{studlySingular}}Request;
+use App\Http\Requests\Dashboard\{{studlySingular}}Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -45,7 +45,7 @@ class {{studlySingular}}Controller extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \App\Http\Requests\{{studlyPlural}}\{{studlySingular}}Request $request
+     * @param \App\Http\Requests\{{studlySingular}}Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store({{studlySingular}}Request $request)
@@ -82,7 +82,7 @@ class {{studlySingular}}Controller extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \App\Http\Requests\{{studlyPlural}}\{{studlySingular}}Request $request
+     * @param \App\Http\Requests\{{studlySingular}}Request $request
      * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
      * @return \Illuminate\Http\RedirectResponse
      */
