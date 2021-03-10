@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\{{studlySingular}};
 use Illuminate\Routing\Controller;
-use App\Http\Requests\{{studlySingular}}Request;
+use App\Http\Requests\Dashboard\{{studlySingular}}Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
@@ -113,5 +113,67 @@ class {{studlySingular}}Controller extends Controller
         flash(trans('{{lowercasePlural}}.messages.deleted'));
 
         return redirect()->route('dashboard.{{lowercasePlural}}.index');
+    }
+
+    /**
+     * Display a listing of the trashed resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function trashed()
+    {
+        $this->authorize('viewAnyTrash', {{studlySingular}}::class);
+
+        ${{lowercasePlural}} = {{studlySingular}}::onlyTrashed()->paginate();
+
+        return view('dashboard.{{lowercasePlural}}.trashed', compact('{{lowercasePlural}}'));
+    }
+
+    /**
+     * Display the specified trashed resource.
+     *
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @return \Illuminate\Http\Response
+     */
+    public function showTrashed({{studlySingular}} ${{lowercaseSingular}})
+    {
+        $this->authorize('viewTrash', ${{lowercaseSingular}});
+
+        return view('dashboard.{{lowercasePlural}}.show', compact('{{lowercaseSingular}}'));
+    }
+
+    /**
+     * Restore the trashed resource.
+     *
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function restore({{studlySingular}} ${{lowercaseSingular}})
+    {
+        $this->authorize('restore', ${{lowercaseSingular}});
+
+        ${{lowercaseSingular}}->restore();
+
+        flash()->success(trans('{{lowercasePlural}}.messages.restored'));
+
+        return redirect()->route('dashboard.{{lowercasePlural}}.trashed');
+    }
+
+    /**
+     * Force delete the specified resource from storage.
+     *
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @throws \Exception
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function forceDelete({{studlySingular}} ${{lowercaseSingular}})
+    {
+        $this->authorize('forceDelete', ${{lowercaseSingular}});
+
+        ${{lowercaseSingular}}->forceDelete();
+
+        flash(trans('{{lowercasePlural}}.messages.deleted'));
+
+        return redirect()->route('dashboard.{{lowercasePlural}}.trashed');
     }
 }

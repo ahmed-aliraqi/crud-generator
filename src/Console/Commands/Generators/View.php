@@ -54,6 +54,38 @@ class View extends CrudGenerator
         );
         static::put(
             resource_path("views/dashboard/{$name}/partials/actions"),
+            'forceDelete.blade.php',
+            self::qualifyContent(
+                $stubPath.'/partials/actions/forceDelete.blade.stub',
+                $name
+            )
+        );
+        static::put(
+            resource_path("views/dashboard/{$name}/partials/actions"),
+            'link.blade.php',
+            self::qualifyContent(
+                $stubPath.'/partials/actions/link.blade.stub',
+                $name
+            )
+        );
+        static::put(
+            resource_path("views/dashboard/{$name}/partials/actions"),
+            'restore.blade.php',
+            self::qualifyContent(
+                $stubPath.'/partials/actions/restore.blade.stub',
+                $name
+            )
+        );
+        static::put(
+            resource_path("views/dashboard/{$name}/partials/actions"),
+            'trashed.blade.php',
+            self::qualifyContent(
+                $stubPath.'/partials/actions/trashed.blade.stub',
+                $name
+            )
+        );
+        static::put(
+            resource_path("views/dashboard/{$name}/partials/actions"),
             'show.blade.php',
             self::qualifyContent(
                 $stubPath.'/partials/actions/show.blade.stub',
@@ -115,6 +147,14 @@ class View extends CrudGenerator
             'show.blade.php',
             self::qualifyContent(
                 $stubPath.'/show.blade.stub',
+                $name
+            )
+        );
+        static::put(
+            resource_path("views/dashboard/{$name}"),
+            'trashed.blade.php',
+            self::qualifyContent(
+                $stubPath.'/trashed.blade.stub',
                 $name
             )
         );

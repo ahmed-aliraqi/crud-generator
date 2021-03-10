@@ -1,0 +1,6 @@
+@can('viewAnyTrash', \App\Models\{{studlySingular}}::class)
+    <a href="{{ route('dashboard.{{lowercasePlural}}.trashed') }}" class="btn btn-outline-danger btn-sm">
+        <i class="fas fa fa-fw fa-trash"></i>
+        @lang('{{lowercasePlural}}.trashed')
+    </a>
+@endcan

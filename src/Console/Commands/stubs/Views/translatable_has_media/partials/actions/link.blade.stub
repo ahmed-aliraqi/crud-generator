@@ -1,0 +1,13 @@
+@if(${{lowercaseSingular}})
+    @if(method_exists(${{lowercaseSingular}}, 'trashed') && ${{lowercaseSingular}}->trashed())
+        <a href="{{ route('dashboard.{{lowercasePlural}}.trashed.show', ${{lowercaseSingular}}) }}" class="text-decoration-none text-ellipsis">
+            {{ ${{lowercaseSingular}}->name }}
+        </a>
+    @else
+        <a href="{{ route('dashboard.{{lowercasePlural}}.show', ${{lowercaseSingular}}) }}" class="text-decoration-none text-ellipsis">
+            {{ ${{lowercaseSingular}}->name }}
+        </a>
+    @endif
+@else
+    ---
+@endif

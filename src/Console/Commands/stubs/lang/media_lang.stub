@@ -8,6 +8,7 @@ return [
     'search' => '{{search}}',
     'select' => '{{select}}',
     'permission' => '{{permission}}',
+    'trashed' => '{{trashed}}',
     'perPage' => '{{perPage}}',
     'filter' => '{{filter}}',
     'actions' => [
@@ -16,6 +17,8 @@ return [
         'show' => '{{actions.show}}',
         'edit' => '{{actions.edit}}',
         'delete' => '{{actions.delete}}',
+        'restore' => '{{actions.restore}}',
+        'forceDelete' => '{{actions.forceDelete}}',
         'options' => '{{actions.options}}',
         'save' => '{{actions.save}}',
         'filter' => '{{actions.filter}}',
@@ -24,6 +27,7 @@ return [
         'created' => '{{messages.created}}',
         'updated' => '{{messages.updated}}',
         'deleted' => '{{messages.deleted}}',
+        'restored' => '{{messages.restored}}',
     ],
     'attributes' => [
         'name' => '{{attributes.name}}',
@@ -35,6 +39,18 @@ return [
             'info' => '{{dialogs.delete.info}}',
             'confirm' => '{{dialogs.delete.confirm}}',
             'cancel' => '{{dialogs.delete.cancel}}',
+        ],
+        'restore' => [
+            'title' => '{{dialogs.restore.title}}',
+            'info' => '{{dialogs.restore.info}}',
+            'confirm' => '{{dialogs.restore.confirm}}',
+            'cancel' => '{{dialogs.restore.cancel}}',
+        ],
+        'forceDelete' => [
+            'title' => '{{dialogs.forceDelete.title}}',
+            'info' => '{{dialogs.forceDelete.info}}',
+            'confirm' => '{{dialogs.forceDelete.confirm}}',
+            'cancel' => '{{dialogs.forceDelete.cancel}}',
         ],
     ],
 ];

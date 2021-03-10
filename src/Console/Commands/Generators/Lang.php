@@ -64,6 +64,7 @@ class Lang extends CrudGenerator
                 "{{search}}",
                 "{{select}}",
                 "{{permission}}",
+                "{{trashed}}",
                 "{{perPage}}",
                 "{{filter}}",
                 "{{actions.list}}",
@@ -71,12 +72,15 @@ class Lang extends CrudGenerator
                 "{{actions.show}}",
                 "{{actions.edit}}",
                 "{{actions.delete}}",
+                "{{actions.restore}}",
+                "{{actions.forceDelete}}",
                 "{{actions.options}}",
                 "{{actions.save}}",
                 "{{actions.filter}}",
                 "{{messages.created}}",
                 "{{messages.updated}}",
                 "{{messages.deleted}}",
+                "{{messages.restored}}",
                 "{{attributes.name}}",
                 "{{attributes.%name%}}",
                 "{{attributes.image}}",
@@ -84,6 +88,14 @@ class Lang extends CrudGenerator
                 "{{dialogs.delete.info}}",
                 "{{dialogs.delete.confirm}}",
                 "{{dialogs.delete.cancel}}",
+                "{{dialogs.restore.title}}",
+                "{{dialogs.restore.info}}",
+                "{{dialogs.restore.confirm}}",
+                "{{dialogs.restore.cancel}}",
+                "{{dialogs.forceDelete.title}}",
+                "{{dialogs.forceDelete.info}}",
+                "{{dialogs.forceDelete.confirm}}",
+                "{{dialogs.forceDelete.cancel}}",
             ],
             $replaceArray,
             file_get_contents($stub)
@@ -92,7 +104,7 @@ class Lang extends CrudGenerator
 
     public static function arabicResourceLang($resource)
     {
-        $name = (string) Str::of($resource)->singular()->snake();
+        $name = (string)Str::of($resource)->singular()->snake();
 
         $names = static::arabicWords()[$name];
 
@@ -109,6 +121,7 @@ class Lang extends CrudGenerator
             "بحث",
             "اختر $singular1",
             "ادارة $plural1",
+            "$plural1 المحذوفة",
             "عدد النتائج بالصفحة",
             "ابحث عن $singular2",
             "عرض الكل",
@@ -116,18 +129,29 @@ class Lang extends CrudGenerator
             "عرض $singular1",
             "تعديل $singular1",
             "حذف $singular1",
+            "استعادة",
+            "حذف نهائي",
             "خيارات",
             "حفظ",
             "بحث",
             "تم اضافة $singular1 بنجاح.",
             "تم تعديل $singular1 بنجاح.",
             "تم حذف $singular1 بنجاح.",
+            "تم استعادة $singular1 بنجاح.",
             "اسم $singular1",
             "اسم $singular1",
             "صورة $singular1",
             "تحذير !",
             "هل انت متأكد انك تريد حذف $singular1",
             "حذف",
+            "الغاء",
+            "تحذير !",
+            "هل انت متأكد انك تريد استعادة $singular1",
+            "استعادة",
+            "الغاء",
+            "تحذير !",
+            "هل انت متأكد انك تريد حذف $singular1 نهائياً",
+            "حذف نهائي",
             "الغاء",
         ];
     }
@@ -147,6 +171,7 @@ class Lang extends CrudGenerator
             "Search",
             "Select $studlySingular",
             "Manage $lowercasePlural",
+            "Trashed $lowercasePlural",
             "Results Per Page",
             "Search for $lowercaseSingular",
             "List All",
@@ -154,18 +179,29 @@ class Lang extends CrudGenerator
             "Show $lowercaseSingular",
             "Edit $lowercaseSingular",
             "Delete $lowercaseSingular",
+            "Restore",
+            "Delete Forever",
             "Options",
             "Save",
             "Filter",
             "The $lowercaseSingular has been created successfully.",
             "The $lowercaseSingular has been updated successfully.",
             "The $lowercaseSingular has been deleted successfully.",
+            "The $lowercaseSingular has been restored successfully.",
             "$studlySingular name",
             "$studlySingular name",
             "$studlySingular image",
             "Warning !",
-            "Are you sure you want to delete the $lowercaseSingular?",
+            "Are you sure you want to delete the $lowercaseSingular ?",
             "Delete",
+            "Cancel",
+            "Warning !",
+            "Are you sure you want to restore the $lowercaseSingular ?",
+            "Restore",
+            "Cancel",
+            "Warning !",
+            "Are you sure you want to delete the $lowercaseSingular forever ?",
+            "Delete Forever",
             "Cancel",
         ];
     }
@@ -177,7 +213,7 @@ class Lang extends CrudGenerator
 
     public static function ensureArabicWasRegistered($resource)
     {
-        $name = (string) Str::of($resource)->singular()->snake();
+        $name = (string)Str::of($resource)->singular()->snake();
 
         if (! isset(static::arabicWords()[$name])) {
             throw new \Exception("The '$name' word doesn't register.");

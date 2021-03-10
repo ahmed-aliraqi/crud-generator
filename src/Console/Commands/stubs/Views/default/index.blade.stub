@@ -9,11 +9,16 @@
         <thead>
         <tr>
           <th colspan="100">
-            <x-check-all-delete
-                type="{{ \App\Models\{{studlySingular}}::class }}"
-                :resource="trans('{{lowercasePlural}}.plural')"></x-check-all-delete>
+            <div class="d-flex">
+                <x-check-all-delete
+                        type="{{ \App\Models\{{studlySingular}}::class }}"
+                        :resource="trans('{{lowercasePlural}}.plural')"></x-check-all-delete>
 
-            @include('dashboard.{{lowercasePlural}}.partials.actions.create')
+                <div class="ml-2 d-flex justify-content-between flex-grow-1">
+                    @include('dashboard.{{lowercasePlural}}.partials.actions.create')
+                    @include('dashboard.{{lowercasePlural}}.partials.actions.trashed')
+                </div>
+            </div>
           </th>
         </tr>
         <tr>

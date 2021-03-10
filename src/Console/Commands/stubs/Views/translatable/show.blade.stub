@@ -17,6 +17,8 @@
                 @slot('footer')
                     @include('dashboard.{{lowercasePlural}}.partials.actions.edit')
                     @include('dashboard.{{lowercasePlural}}.partials.actions.delete')
+                    @include('dashboard.{{lowercasePlural}}.partials.actions.restore')
+                    @include('dashboard.{{lowercasePlural}}.partials.actions.forceDelete')
                 @endslot
             @endcomponent
         </div>

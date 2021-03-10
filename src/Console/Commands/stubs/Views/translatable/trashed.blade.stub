@@ -1,4 +1,4 @@
-<x-layout :title="trans('{{lowercasePlural}}.plural')" :breadcrumbs="['dashboard.{{lowercasePlural}}.index']">
+<x-layout :title="trans('{{lowercasePlural}}.trashed')" :breadcrumbs="['dashboard.{{lowercasePlural}}.trashed']">
     @include('dashboard.{{lowercasePlural}}.partials.filter')
 
     @component('dashboard::components.table-box')
@@ -9,16 +9,12 @@
         <thead>
         <tr>
           <th colspan="100">
-              <div class="d-flex">
-                  <x-check-all-delete
-                          type="{{ \App\Models\{{studlySingular}}::class }}"
-                          :resource="trans('{{lowercasePlural}}.plural')"></x-check-all-delete>
-
-                  <div class="ml-2 d-flex justify-content-between flex-grow-1">
-                      @include('dashboard.{{lowercasePlural}}.partials.actions.create')
-                      @include('dashboard.{{lowercasePlural}}.partials.actions.trashed')
-                  </div>
-              </div>
+              <x-check-all-force-delete
+                      type="{{ \App\Models\{{studlySingular}}::class }}"
+                      :resource="trans('{{lowercasePlural}}.plural')"></x-check-all-force-delete>
+              <x-check-all-restore
+                      type="{{ \App\Models\{{studlySingular}}::class }}"
+                      :resource="trans('{{lowercasePlural}}.plural')"></x-check-all-restore>
           </th>
         </tr>
         <tr>
@@ -36,20 +32,16 @@
                   <x-check-all-item :model="${{lowercaseSingular}}"></x-check-all-item>
                 </td>
                 <td>
-                    <a href="{{ route('dashboard.{{lowercasePlural}}.show', ${{lowercaseSingular}}) }}"
+                    <a href="{{ route('dashboard.{{lowercasePlural}}.trashed.show', ${{lowercaseSingular}}) }}"
                        class="text-decoration-none text-ellipsis">
-
-                        <img src="{{ ${{lowercaseSingular}}->getFirstMediaUrl() }}"
-                             alt="Product 1"
-                             class="img-circle img-size-32 mr-2" style="height: 32px;">
                         {{ ${{lowercaseSingular}}->name }}
                     </a>
                 </td>
 
                 <td style="width: 160px">
                     @include('dashboard.{{lowercasePlural}}.partials.actions.show')
-                    @include('dashboard.{{lowercasePlural}}.partials.actions.edit')
-                    @include('dashboard.{{lowercasePlural}}.partials.actions.delete')
+                    @include('dashboard.{{lowercasePlural}}.partials.actions.restore')
+                    @include('dashboard.{{lowercasePlural}}.partials.actions.forceDelete')
                 </td>
             </tr>
         @empty

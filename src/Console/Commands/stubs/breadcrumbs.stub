@@ -5,6 +5,11 @@ Breadcrumbs::for('dashboard.{{lowercasePlural}}.index', function ($breadcrumb) {
     $breadcrumb->push(trans('{{lowercasePlural}}.plural'), route('dashboard.{{lowercasePlural}}.index'));
 });
 
+Breadcrumbs::for('dashboard.{{lowercasePlural}}.trashed', function ($breadcrumb) {
+    $breadcrumb->parent('dashboard.{{lowercasePlural}}.index');
+    $breadcrumb->push(trans('{{lowercasePlural}}.trashed'), route('dashboard.{{lowercasePlural}}.trashed'));
+});
+
 Breadcrumbs::for('dashboard.{{lowercasePlural}}.create', function ($breadcrumb) {
     $breadcrumb->parent('dashboard.{{lowercasePlural}}.index');
     $breadcrumb->push(trans('{{lowercasePlural}}.actions.create'), route('dashboard.{{lowercasePlural}}.create'));

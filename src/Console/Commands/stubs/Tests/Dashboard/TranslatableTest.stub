@@ -120,6 +120,80 @@ class {{studlySingular}}Test extends TestCase
     }
 
     /** @test */
+    public function it_can_display_trashed_{{lowercasePlural}}()
+    {
+        if (! $this->useSoftDeletes($model = {{studlySingular}}::class)) {
+            $this->markTestSkipped("The '$model' doesn't use soft deletes trait.");
+        }
+
+        {{studlySingular}}::factory()->create(['deleted_at' => now(), 'name' => 'Ahmed']);
+
+        $this->actingAsAdmin();
+
+        $response = $this->get(route('dashboard.{{lowercasePlural}}.trashed'));
+
+        $response->assertSuccessful();
+
+        $response->assertSee('Ahmed');
+    }
+
+    /** @test */
+    public function it_can_display_trashed_{{lowercaseSingular}}_details()
+    {
+        if (! $this->useSoftDeletes($model = {{studlySingular}}::class)) {
+            $this->markTestSkipped("The '$model' doesn't use soft deletes trait.");
+        }
+
+        ${{lowercaseSingular}} = {{studlySingular}}::factory()->create(['deleted_at' => now(), 'name' => 'Ahmed']);
+
+        $this->actingAsAdmin();
+
+        $response = $this->get(route('dashboard.{{lowercasePlural}}.trashed.show', ${{lowercaseSingular}}));
+
+        $response->assertSuccessful();
+
+        $response->assertSee('Ahmed');
+    }
+
+    /** @test */
+    public function it_can_restore_deleted_{{lowercaseSingular}}()
+    {
+        if (! $this->useSoftDeletes($model = {{studlySingular}}::class)) {
+            $this->markTestSkipped("The '$model' doesn't use soft deletes trait.");
+        }
+
+        ${{lowercaseSingular}} = {{studlySingular}}::factory()->create(['deleted_at' => now()]);
+
+        $this->actingAsAdmin();
+
+        $response = $this->post(route('dashboard.{{lowercasePlural}}.restore', ${{lowercaseSingular}}));
+
+        $response->assertRedirect();
+
+        $this->assertNull(${{lowercaseSingular}}->refresh()->deleted_at);
+    }
+
+    /** @test */
+    public function it_can_force_delete_{{lowercaseSingular}}()
+    {
+        if (! $this->useSoftDeletes($model = {{studlySingular}}::class)) {
+            $this->markTestSkipped("The '$model' doesn't use soft deletes trait.");
+        }
+
+        ${{lowercaseSingular}} = {{studlySingular}}::factory()->create(['deleted_at' => now()]);
+
+        ${{lowercaseSingular}}Count = {{studlySingular}}::withTrashed()->count();
+
+        $this->actingAsAdmin();
+
+        $response = $this->delete(route('dashboard.{{lowercasePlural}}.forceDelete', ${{lowercaseSingular}}));
+
+        $response->assertRedirect();
+
+        $this->assertEquals({{studlySingular}}::withoutTrashed()->count(), ${{lowercaseSingular}}Count - 1);
+    }
+
+    /** @test */
     public function it_can_filter_{{lowercasePlural}}_by_name()
     {
         $this->actingAsAdmin();

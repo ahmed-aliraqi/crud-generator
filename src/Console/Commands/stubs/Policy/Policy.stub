@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 use App\Models\{{studlySingular}};
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class {{studlySingular}}Policy
@@ -53,7 +54,7 @@ class {{studlySingular}}Policy
      */
     public function update(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return $user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}');
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && ! $this->trashed(${{lowercaseSingular}});
     }
 
     /**
@@ -65,6 +66,77 @@ class {{studlySingular}}Policy
      */
     public function delete(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return $user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}');
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && ! $this->trashed(${{lowercaseSingular}});
+    }
+
+    /**
+     * Determine whether the user can view trashed {{lowercasePlural}}.
+     *
+     * @param \App\Models\User $user
+     * @return mixed
+     */
+    public function viewAnyTrash(User $user)
+    {
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && $this->hasSoftDeletes();
+    }
+
+    /**
+     * Determine whether the user can view the trashed {{lowercaseSingular}}.
+     *
+     * @param \App\Models\User|null $user
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @return mixed
+     */
+    public function viewTrash(User $user, {{studlySingular}} ${{lowercaseSingular}})
+    {
+        return $this->view($user, ${{lowercaseSingular}}) && ${{lowercaseSingular}}->trashed();
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @return mixed
+     */
+    public function restore(User $user, {{studlySingular}} ${{lowercaseSingular}})
+    {
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && $this->trashed(${{lowercaseSingular}});
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param \App\Models\User $user
+     * @param \App\Models\{{studlySingular}} ${{lowercaseSingular}}
+     * @return mixed
+     */
+    public function forceDelete(User $user, {{studlySingular}} ${{lowercaseSingular}})
+    {
+        return ($user->isAdmin() && $user->isNot(${{lowercaseSingular}}) || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && $this->trashed(${{lowercaseSingular}});
+    }
+
+    /**
+     * Determine wither the given {{lowercaseSingular}} is trashed.
+     *
+     * @param ${{lowercaseSingular}}
+     * @return bool
+     */
+    public function trashed(${{lowercaseSingular}})
+    {
+        return $this->hasSoftDeletes() && method_exists(${{lowercaseSingular}}, 'trashed') && ${{lowercaseSingular}}->trashed();
+    }
+
+    /**
+     * Determine wither the model use soft deleting trait.
+     *
+     * @return bool
+     */
+    public function hasSoftDeletes()
+    {
+        return in_array(
+            SoftDeletes::class,
+            array_keys((new \ReflectionClass({{studlySingular}}::class))->getTraits())
+        );
     }
 }
