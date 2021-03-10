@@ -54,7 +54,7 @@ class {{studlySingular}}Controller extends Controller
 
         ${{lowercaseSingular}}->addAllMediaFromTokens();
 
-        flash(trans('{{lowercasePlural}}.messages.created'));
+        flash()->success(trans('{{lowercasePlural}}.messages.created'));
 
         return redirect()->route('dashboard.{{lowercasePlural}}.show', ${{lowercaseSingular}});
     }
@@ -94,7 +94,7 @@ class {{studlySingular}}Controller extends Controller
 
         ${{lowercaseSingular}}->addAllMediaFromTokens();
 
-        flash(trans('{{lowercasePlural}}.messages.updated'));
+        flash()->success(trans('{{lowercasePlural}}.messages.updated'));
 
         return redirect()->route('dashboard.{{lowercasePlural}}.show', ${{lowercaseSingular}});
     }
@@ -110,7 +110,7 @@ class {{studlySingular}}Controller extends Controller
     {
         ${{lowercaseSingular}}->delete();
 
-        flash(trans('{{lowercasePlural}}.messages.deleted'));
+        flash()->success(trans('{{lowercasePlural}}.messages.deleted'));
 
         return redirect()->route('dashboard.{{lowercasePlural}}.index');
     }
@@ -172,7 +172,7 @@ class {{studlySingular}}Controller extends Controller
 
         ${{lowercaseSingular}}->forceDelete();
 
-        flash(trans('{{lowercasePlural}}.messages.deleted'));
+        flash()->success(trans('{{lowercasePlural}}.messages.deleted'));
 
         return redirect()->route('dashboard.{{lowercasePlural}}.trashed');
     }
