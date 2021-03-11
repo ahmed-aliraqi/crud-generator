@@ -80,6 +80,8 @@ class CrudMakeCommand extends Command
 
         app(Modifier::class)->softDeletes($name);
 
+        app(Modifier::class)->langGenerator($name);
+
         $seederName = Str::of($name)->singular()->studly().'Seeder';
 
         $this->info('Api Crud for '.$name.' created successfully 🎉');
