@@ -5,6 +5,7 @@ namespace App\Policies;
 use App\Models\User;
 use App\Models\{{studlySingular}};
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Laraeast\LaravelSettings\Facades\Settings;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class {{studlySingular}}Policy
@@ -54,7 +55,8 @@ class {{studlySingular}}Policy
      */
     public function update(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && ! $this->trashed(${{lowercaseSingular}});
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}'))
+            && ! $this->trashed(${{lowercaseSingular}});
     }
 
     /**
@@ -66,7 +68,8 @@ class {{studlySingular}}Policy
      */
     public function delete(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && ! $this->trashed(${{lowercaseSingular}});
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}'))
+            && ! $this->trashed(${{lowercaseSingular}});
     }
 
     /**
@@ -77,7 +80,8 @@ class {{studlySingular}}Policy
      */
     public function viewAnyTrash(User $user)
     {
-        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && $this->hasSoftDeletes();
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}'))
+            && $this->hasSoftDeletes();
     }
 
     /**
@@ -89,7 +93,8 @@ class {{studlySingular}}Policy
      */
     public function viewTrash(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return $this->view($user, ${{lowercaseSingular}}) && ${{lowercaseSingular}}->trashed();
+        return $this->view($user, ${{lowercaseSingular}})
+            && ${{lowercaseSingular}}->trashed();
     }
 
     /**
@@ -101,7 +106,8 @@ class {{studlySingular}}Policy
      */
     public function restore(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && $this->trashed(${{lowercaseSingular}});
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}'))
+            && $this->trashed(${{lowercaseSingular}});
     }
 
     /**
@@ -113,7 +119,9 @@ class {{studlySingular}}Policy
      */
     public function forceDelete(User $user, {{studlySingular}} ${{lowercaseSingular}})
     {
-        return ($user->isAdmin() && $user->isNot(${{lowercaseSingular}}) || $user->hasPermissionTo('manage.{{lowercasePlural}}')) && $this->trashed(${{lowercaseSingular}});
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.{{lowercasePlural}}'))
+            && $this->trashed(${{lowercaseSingular}})
+            && Settings::get('delete_forever');
     }
 
     /**
