@@ -63,9 +63,9 @@ class {{studlySingular}} extends Model implements HasMedia, TranslatableContract
     public function registerMediaCollections(): void
     {
         $this
-            ->addMediaCollection('default');
-        //->useFallbackUrl('/url/to/default')
-        //->singleFile()
+            ->addMediaCollection('default')
+            ->useFallbackPath(public_path('images/placeholder.png'))
+            ->useFallbackUrl(url('images/placeholder.png'));
 
     }
 }
