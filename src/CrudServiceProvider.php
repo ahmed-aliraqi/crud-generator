@@ -2,6 +2,7 @@
 
 namespace AhmedAliraqi\CrudGenerator;
 
+use AhmedAliraqi\CrudGenerator\Console\Commands\AccountCloneCommand;
 use Illuminate\Support\ServiceProvider;
 use AhmedAliraqi\CrudGenerator\Console\Commands\CrudMakeCommand;
 
@@ -20,6 +21,7 @@ class CrudServiceProvider extends ServiceProvider
 
         $this->commands([
             CrudMakeCommand::class,
+            AccountCloneCommand::class,
         ]);
     }
 }
