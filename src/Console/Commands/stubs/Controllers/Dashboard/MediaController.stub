@@ -27,7 +27,7 @@ class {{studlySingular}}Controller extends Controller
      */
     public function index()
     {
-        ${{lowercasePlural}} = {{studlySingular}}::filter()->paginate();
+        ${{lowercasePlural}} = {{studlySingular}}::filter()->latest()->paginate();
 
         return view('dashboard.{{lowercasePlural}}.index', compact('{{lowercasePlural}}'));
     }
@@ -124,7 +124,7 @@ class {{studlySingular}}Controller extends Controller
     {
         $this->authorize('viewAnyTrash', {{studlySingular}}::class);
 
-        ${{lowercasePlural}} = {{studlySingular}}::onlyTrashed()->paginate();
+        ${{lowercasePlural}} = {{studlySingular}}::onlyTrashed()->latest('deleted_at')->paginate();
 
         return view('dashboard.{{lowercasePlural}}.trashed', compact('{{lowercasePlural}}'));
     }
