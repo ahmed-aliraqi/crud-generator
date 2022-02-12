@@ -28,7 +28,7 @@ class Lang extends CrudGenerator
         }
 
         static::put(
-            resource_path("lang/en"),
+            base_path("lang/en"),
             $name.'.php',
             self::qualifyContent(
                 $stub,
@@ -38,7 +38,7 @@ class Lang extends CrudGenerator
         );
 
         static::put(
-            resource_path("lang/ar"),
+            base_path("lang/ar"),
             $name.'.php',
             self::qualifyContent(
                 $stub,
