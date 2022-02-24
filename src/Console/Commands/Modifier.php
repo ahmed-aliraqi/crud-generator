@@ -122,7 +122,7 @@ SEEDER;
         $configFile = file_get_contents(config_path('lang-generator.php'));
 
         $lang = <<<LANG
-'$resource' => resource_path('lang/{lang}/$resource.php'),
+'$resource' => base_path('lang/{lang}/$resource.php'),
         /*  The lang of generated crud will set here: Don't remove this line  */
 LANG;
 
