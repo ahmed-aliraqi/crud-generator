@@ -107,18 +107,18 @@ Route::resource('merchants', 'MerchantController');
 ```
 - Add `actingAsMerchant` helper into `tests/TestCase.php`
 ```php
-   /**
-    * Set the currently logged in merchant for the application.
-    *
-    * @param null $driver
-    * @return \App\Models\Merchant
-    */
-   public function actingAsMerchant($driver = null)
-   {
-       $merchant = Merchant::factory()->create();
+  /**
+   * Set the currently logged in merchant for the application.
+   *
+   * @param null $driver
+   * @return \App\Models\Merchant
+   */
+  public function actingAsMerchant($driver = null)
+  {
+      $merchant = Merchant::factory()->create();
 
-       $this->be($merchant, $driver);
+      $this->be($merchant, $driver);
 
-       return $merchant;
-   }
+      return $merchant;
+  }
 ```
