@@ -90,6 +90,15 @@ Merchant::factory()->count(10)->create();
   - `Customer` => `Merchant` 
   - `customers` => `merchants` 
   - `customer` => `merchant` 
+- Add Sidebar link in `resources/views/dashboard/accounts/sidebar.blade.php`:
+```php
+[
+    'name' => trans('merchants.plural'),
+    'url' => route('dashboard.merchants.index'),
+    'can' => ['ability' => 'viewAny', 'model' => \App\Models\Merchant::class],
+    'active' => request()->routeIs('*merchants*'),
+], 
+```
 - Add the routes for the newly generated type in `routes/dashboard.php` file:
 ```php
 // Merchants Routes.
