@@ -53,3 +53,69 @@ Also you can use both options together to generate translatable and has media CR
 ```shell
 php artisan make:crud category --translatable --has-media
 ```
+
+### Account Type Cloner
+```shell
+php artisan account:clone customer merchant
+```
+> This command will clone `customer` account type to another type named `merchant`,
+
+Some files should be modified manually like:
+- add constant for the newly generated type in `app/Models/User.php`
+```php
+/**
+ * The code of merchant type.
+ *
+ * @var string
+ */
+const MERCHANT_TYPE = 'merchant';
+```
+Then register the type in `childTypes` array:
+```php
+/**
+ * @var array
+ */
+protected $childTypes = [
+    // other types ...
+    self::MERCHANT_TYPE => Merchant::class,
+];
+```
+- Update arabic translations in lang file for generated type `lang/ar/merchant.php`
+- Clone view files in dashboard from `customer` directory to `merchant` and replace all `customer` word
+ to `merchant`
+  - `Customer` => `Merchant` 
+  - `customers` => `merchants` 
+  - `customer` => `merchant` 
+- Add the routes for the newly generated type in `routes/dashboard.php` file:
+```php
+// Merchants Routes.
+Route::get('trashed/merchants', 'MerchantController@trashed')->name('merchants.trashed');
+Route::get('trashed/merchants/{trashed_merchant}', 'MerchantController@showTrashed')->name('merchants.trashed.show');
+Route::post('merchants/{trashed_merchant}/restore', 'MerchantController@restore')->name('merchants.restore');
+Route::delete('merchants/{trashed_merchant}/forceDelete', 'MerchantController@forceDelete')->name('merchants.forceDelete');
+Route::resource('merchants', 'MerchantController');
+```
+- Add route binding in `storage/soft_deletes_route_binding.json`:
+```json
+{
+ ...
+ "trashed_merchant": "App\\Models\\Merchant"
+}
+```
+- Add `actingAsMerchant` helper into `tests/TestCase.php`
+```php
+   /**
+    * Set the currently logged in merchant for the application.
+    *
+    * @param null $driver
+    * @return \App\Models\Merchant
+    */
+   public function actingAsMerchant($driver = null)
+   {
+       $merchant = Merchant::factory()->create();
+
+       $this->be($merchant, $driver);
+
+       return $merchant;
+   }
+```
