@@ -80,6 +80,10 @@ protected $childTypes = [
     self::MERCHANT_TYPE => Merchant::class,
 ];
 ```
+- Add seeders in `database/seeders/UserSeeder.php`:
+```php
+Merchant::factory()->count(10)->create();
+```
 - Update arabic translations in lang file for generated type `lang/ar/merchant.php`
 - Clone view files in dashboard from `customer` directory to `merchant` and replace all `customer` word
  to `merchant`
@@ -98,7 +102,6 @@ Route::resource('merchants', 'MerchantController');
 - Add route binding in `storage/soft_deletes_route_binding.json`:
 ```json
 {
- ...
  "trashed_merchant": "App\\Models\\Merchant"
 }
 ```
