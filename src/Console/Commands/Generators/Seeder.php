@@ -15,7 +15,7 @@ class Seeder extends CrudGenerator
         $stub = __DIR__.'/../stubs/Seeder.stub';
 
         static::put(
-            database_path('seeds'),
+            database_path('seeders'),
             $name.'Seeder.php',
             self::qualifyContent(
                 $stub,
