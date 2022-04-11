@@ -101,7 +101,7 @@ SIDEBAR;
 
         $pattern = '\/\*  The seeders of generated crud will set here: Don\'t remove this line  \*\/';
 
-        $seederFile = file_get_contents(database_path('seeds/DummyDataSeeder.php'));
+        $seederFile = file_get_contents(database_path('seeders/DummyDataSeeder.php'));
 
         $seeder = <<<SEEDER
 \$this->call({$resource}Seeder::class);
@@ -110,7 +110,7 @@ SEEDER;
 
         $seederFile = preg_replace("/$pattern/", $seeder, $seederFile);
 
-        file_put_contents(database_path('seeds/DummyDataSeeder.php'), $seederFile);
+        file_put_contents(database_path('seeders/DummyDataSeeder.php'), $seederFile);
     }
 
     public function langGenerator($name)
