@@ -85,6 +85,13 @@ protected $childTypes = [
 Merchant::factory()->count(10)->create();
 ```
 - Update arabic translations in lang file for generated type `lang/ar/merchant.php`
+- Add type translated key into `lang/{lang}/users.php`:
+```php
+'types' => [
+    // Other types ...
+    'merchant' => 'Merchant',
+],
+```
 - Clone view files in dashboard from `customer` directory to `merchant` and replace all `customer` word
  to `merchant`
   - `Customer` => `Merchant` 
