@@ -121,6 +121,12 @@ Route::resource('merchants', 'MerchantController');
  "trashed_merchant": "App\\Models\\Merchant"
 }
 ```
+- Add the permision in `storage/permissions.json`:
+```json
+[
+    "manage.merchants"
+]
+```
 - Add `actingAsMerchant` helper into `tests/TestCase.php`
 ```php
   /**
