@@ -80,6 +80,18 @@ protected $childTypes = [
     self::MERCHANT_TYPE => Merchant::class,
 ];
 ```
+- Add check for type helper in `app/Models/Helpers/UserHelper.php`:
+```php
+/**
+ * Determine whether the user type is merchant.
+ *
+ * @return bool
+ */
+public function isMerchant()
+{
+    return $this->type == User::MERCHANT_TYPE;
+}
+```
 - Add seeders in `database/seeders/UserSeeder.php`:
 ```php
 Merchant::factory()->count(10)->create();
