@@ -96,6 +96,14 @@ public function isMerchant()
 ```php
 Merchant::factory()->count(10)->create();
 ```
+- Add translation lang file name to `config/lang-generator.php`
+```php
+    'lang' => [
+        // ...
+        'merchants' => base_path('lang/{lang}/merchants.php'),
+        /*  The lang of generated crud will set here: Don't remove this line  */
+    ],
+```
 - Update arabic translations in lang file for generated type `lang/ar/merchant.php`
 - Add type translated key into `lang/{lang}/users.php`:
 ```php
