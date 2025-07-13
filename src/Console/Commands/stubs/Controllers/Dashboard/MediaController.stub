@@ -52,7 +52,7 @@ class {{studlySingular}}Controller extends Controller
     {
         ${{lowercaseSingular}} = {{studlySingular}}::create($request->all());
 
-        ${{lowercaseSingular}}->addAllMediaFromTokens();
+        ${{lowercaseSingular}}->addAllMediaFromTokens($request->image);
 
         flash()->success(trans('{{lowercasePlural}}.messages.created'));
 
@@ -92,7 +92,7 @@ class {{studlySingular}}Controller extends Controller
     {
         ${{lowercaseSingular}}->update($request->all());
 
-        ${{lowercaseSingular}}->addAllMediaFromTokens();
+        ${{lowercaseSingular}}->addAllMediaFromTokens($request->image);
 
         flash()->success(trans('{{lowercasePlural}}.messages.updated'));
 

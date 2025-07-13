@@ -3,8 +3,24 @@
 {{ BsForm::text('name') }}
 
 @isset(${{lowercaseSingular}})
-    {{ BsForm::image('image')->files(${{lowercaseSingular}}->getMediaResource()) }}
+<file-uploader :media="{{ ${{lowercaseSingular}}->getMediaResource() }}"
+               name="image"
+               :max="1"
+               collection="default"
+               :tokens="{{ json_encode(old('image', [])) }}"
+               label="{{ __('{{lowercasePlural}}.attributes.image') }}"
+               notes="Supported types: jpeg, png,jpg,gif"
+               accept="image/jpeg,image/png,image/jpg,image/gif"
+></file-uploader>
 @else
-    {{ BsForm::image('image') }}
+<file-uploader
+        :media="[]"
+        name="image"
+        :max="1"
+        collection="default"
+        :tokens="{{ json_encode(old('image', [])) }}"
+        label="{{ __('{{lowercasePlural}}.attributes.image') }}"
+        notes="Supported types: jpeg, png,jpg,gif"
+        accept="image/jpeg,image/png,image/jpg,image/gif"
+></file-uploader>
 @endisset
-
