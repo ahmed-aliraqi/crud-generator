@@ -55,6 +55,7 @@ class {{studlySingular}}Test extends TestCase
             route('dashboard.{{lowercasePlural}}.store'),
             {{studlySingular}}::factory()->raw(
                 RuleFactory::make([
+                    'name' => 'Foo',
                     '%name%' => 'Foo',
                 ])
             )
@@ -91,6 +92,7 @@ class {{studlySingular}}Test extends TestCase
             route('dashboard.{{lowercasePlural}}.update', ${{lowercaseSingular}}),
             {{studlySingular}}::factory()->raw(
                 RuleFactory::make([
+                    'name' => 'Foo',
                     '%name%' => 'Foo',
                 ])
             )
