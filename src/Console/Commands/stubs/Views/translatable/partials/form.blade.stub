@@ -1,5 +1,5 @@
 @include('dashboard.errors')
 
-@bsMultilangualFormTabs
+@multilingualFormTabs
 {{ BsForm::text('name') }}
-@endBsMultilangualFormTabs
+@endMultilingualFormTabs

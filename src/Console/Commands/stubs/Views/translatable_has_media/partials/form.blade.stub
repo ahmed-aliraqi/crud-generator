@@ -1,7 +1,7 @@
 @include('dashboard.errors')
-@bsMultilangualFormTabs
+@multilingualFormTabs
 {{ BsForm::text('name') }}
-@endBsMultilangualFormTabs
+@endMultilingualFormTabs
 
 @isset(${{lowercaseSingular}})
     {{ BsForm::image('image')->files(${{lowercaseSingular}}->getMediaResource()) }}
