@@ -4,19 +4,9 @@ namespace AhmedAliraqi\CrudGenerator\Console\Commands;
 
 use Illuminate\Support\Str;
 use Illuminate\Console\Command;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Lang;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Test;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\View;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Model;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Filter;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Policy;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Seeder;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Factory;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Request;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Resource;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Migration;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Breadcrumb;
-use AhmedAliraqi\CrudGenerator\Console\Commands\Generators\Controller;
+use function Laravel\Prompts\confirm;
+use function Laravel\Prompts\multiselect;
+use function Laravel\Prompts\text;
 
 class CrudMakeCommand extends Command
 {
@@ -25,10 +15,7 @@ class CrudMakeCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'make:crud 
-                            {name : Class (Singular), e.g User, Place, Car}
-                            {--translatable}
-                            {--has-media}';
+    protected $signature = 'make:crud {name? : Class (Singular), e.g User, Place, Car}';
 
     /**
      * The console command description.
@@ -54,37 +41,123 @@ class CrudMakeCommand extends Command
      */
     public function handle()
     {
-        Lang::generate($this);
-        Breadcrumb::generate($this);
-        View::generate($this);
-        Resource::generate($this);
-        Migration::generate($this);
-        Factory::generate($this);
-        Seeder::generate($this);
-        Policy::generate($this);
-        Controller::generate($this);
-        Model::generate($this);
-        Request::generate($this);
-        Filter::generate($this);
-        Test::generate($this);
+        $name = $this->argument('name') ?? text('What is the CRUD name?');
 
-        $name = $this->argument('name');
+        $generator = new \LaravelModules\ModuleGenerator\Generator;
 
-        app(Modifier::class)->routes($name);
+        $crud = $generator
+            ->crud(name: $name)
+            ->fromPath(__DIR__.'/../../../stubs/crud')
+            ->toPath(base_path())
+            ->appendToFile(
+                file: resource_path('views/layouts/sidebar.blade.php'),
+                content: "@include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.sidebar')",
+                before: "@include('dashboard.settings.sidebar')",
+            )
+            ->appendToFile(
+                file: database_path('seeders/DummyDataSeeder.php'),
+                content: '$this->call(__CRUD_STUDLY_SINGULAR__Seeder::class);',
+                before: 'The seeders of generated crud',
+            );
 
-        app(Modifier::class)->sidebar($name);
+        $translateToArabic = confirm(
+            label: 'Do you want to translate CRUD to Arabic?',
+            default: false
+        );
 
-        app(Modifier::class)->seeder($name);
+        if ($translateToArabic) {
+            $singular1 = text('Enter the Arabic singular name with “ال”, e.g. القسم');
+            $singular2 = text('Enter the Arabic singular name without “ال”, e.g. قسم');
+            $plural1 = text('Enter the Arabic plural name with “ال”, e.g. الأقسام');
+            $plural2 = text('Enter the Arabic plural name without “ال”, e.g. أقسام', 'أقسام');
+        }
+
+        $features = multiselect('Select the features you want to include', [
+            'media' => 'Media Support',
+            'translatable' => 'Translatable Fields',
+        ]);
+
+        $crud->publish();
+
 
         app(Modifier::class)->permission($name);
 
         app(Modifier::class)->softDeletes($name);
 
-        app(Modifier::class)->langGenerator($name);
+        $langPath = 'simple';
 
-        $seederName = Str::of($name)->singular()->studly().'Seeder';
+        // Simple
+        if (empty($features)) {
+            $generator
+                ->crud(name: $name)
+                ->fromPath(__DIR__.'/../../../stubs/simple')
+                ->toPath(base_path())
+                ->publish();
+        }
+
+        // Media Support
+        if (in_array('media', $features) && ! in_array('translatable', $features)) {
+            $generator
+                ->crud(name: $name)
+                ->fromPath(__DIR__.'/../../../stubs/media')
+                ->toPath(base_path())
+                ->publish();
+
+            $langPath = 'media';
+        }
+
+        // Translatable Support
+        if (! in_array('media', $features) && in_array('translatable', $features)) {
+            $generator
+                ->crud(name: $name)
+                ->fromPath(__DIR__.'/../../../stubs/translatable')
+                ->toPath(base_path())
+                ->publish();
+
+            $langPath = 'translatable';
+        }
+
+        // Media & Translatable Support
+        if (in_array('media', $features) && in_array('translatable', $features)) {
+            $generator
+                ->crud(name: $name)
+                ->fromPath(__DIR__.'/../../../stubs/translatable_media')
+                ->toPath(base_path())
+                ->publish();
+
+            $langPath = 'translatable_media';
+        }
+
+        $generator
+            ->crud(name: $name)
+            ->fromPath(__DIR__."/../../../stubs/$langPath/lang/en")
+            ->toPath(base_path('lang/en'))
+            ->publish();
+
+        if ($translateToArabic) {
+            $generator
+                ->crud(name: $name)
+                ->fromPath(__DIR__."/../../../stubs/$langPath/lang/ar")
+                ->toPath(base_path('lang/ar'))
+                ->appendReplacements([
+                    '__AR_SINGULAR1__' => $singular1,
+                    '__AR_SINGULAR2__' => $singular2,
+                    '__AR_PLURAL1__' => $plural1,
+                    '__AR_PLURAL2__' => $plural2,
+                ])
+                ->publish();
+        } else {
+            $generator
+                ->crud(name: $name)
+                ->fromPath(__DIR__."/../../../stubs/$langPath/lang/en")
+                ->toPath(base_path('lang/ar'))
+                ->publish();
+        }
+
 
         $this->info('Api Crud for '.$name.' created successfully 🎉');
-        $this->warn('Please run "composer dump-autoload && php artisan migrate && php artisan db:seed --class='.$seederName.'"');
+        $this->warn('Please run "composer dump-autoload && php artisan migrate');
+
+        return Command::SUCCESS;
     }
 }

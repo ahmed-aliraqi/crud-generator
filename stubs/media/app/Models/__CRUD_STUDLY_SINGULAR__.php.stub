@@ -1,0 +1,58 @@
+<?php
+
+namespace App\Models;
+
+use AhmedAliraqi\LaravelFilterable\Filterable;
+use AhmedAliraqi\LaravelMediaUploader\Entities\Concerns\HasUploader;
+use App\Http\Filters\__CRUD_STUDLY_SINGULAR__Filter;
+use App\Support\Traits\Selectable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+
+class __CRUD_STUDLY_SINGULAR__ extends Model implements HasMedia
+{
+    use Filterable;
+    use HasFactory;
+    use Selectable;
+    use InteractsWithMedia;
+    use HasUploader;
+
+    /**
+     * The filter class used for querying this model.
+     *
+     * @var class-string<__CRUD_STUDLY_SINGULAR__Filter>
+     */
+    protected string $filter = __CRUD_STUDLY_SINGULAR__Filter::class;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+    ];
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'media',
+    ];
+
+    /**
+     * Define the media collections.
+     */
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('default')
+            ->useFallbackUrl(url('images/placeholder.jpeg'))
+            ->singleFile();
+
+    }
+}

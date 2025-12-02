@@ -1,0 +1,77 @@
+<?php
+
+namespace Tests\Feature\Api;
+
+use App\Models\__CRUD_STUDLY_SINGULAR__;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class __CRUD_STUDLY_SINGULAR__Test extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_it_can_list_all___CRUD_SNAKE_PLURAL__()
+    {
+        $this->actingAsAdmin();
+
+        __CRUD_STUDLY_SINGULAR__::factory()->count(2)->create();
+
+        $this->getJson(route('api.__CRUD_KEBAB_PLURAL__.index'))
+            ->assertSuccessful()
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                        'id',
+                        'name',
+                    ],
+                ],
+            ]);
+    }
+
+    public function test___CRUD_SNAKE_PLURAL___select2_api()
+    {
+        __CRUD_STUDLY_SINGULAR__::factory()->count(5)->create();
+
+        $response = $this->getJson(route('api.__CRUD_KEBAB_PLURAL__.select'))
+            ->assertSuccessful()
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => ['id', 'text'],
+                ],
+            ]);
+
+        $this->assertEquals($response->json('data.0.id'), 1);
+
+        $this->assertCount(5, $response->json('data'));
+
+        $response = $this->getJson(route('api.__CRUD_KEBAB_PLURAL__.select', ['selected_id' => 4]))
+            ->assertSuccessful()
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => ['id', 'text'],
+                ],
+            ]);
+
+        $this->assertEquals($response->json('data.0.id'), 4);
+
+        $this->assertCount(5, $response->json('data'));
+    }
+
+    public function test_it_can_display_the_visitor_details()
+    {
+        $this->actingAsAdmin();
+
+        $__CRUD_STUDLY_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::factory(['name' => 'Foo'])->create();
+
+        $response = $this->getJson(route('api.__CRUD_KEBAB_PLURAL__.show', $__CRUD_STUDLY_SINGULAR__))
+            ->assertSuccessful()
+            ->assertJsonStructure([
+                'data' => [
+                    'id',
+                    'name',
+                ],
+            ]);
+
+        $this->assertEquals($response->json('data.name'), 'Foo');
+    }
+}

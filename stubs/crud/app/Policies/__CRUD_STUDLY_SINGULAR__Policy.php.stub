@@ -1,0 +1,111 @@
+<?php
+
+namespace App\Policies;
+
+use App\Models\__CRUD_STUDLY_SINGULAR__;
+use App\Models\User;
+use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Laraeast\LaravelSettings\Facades\Settings;
+
+class __CRUD_STUDLY_SINGULAR__Policy
+{
+    use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can view any __CRUD_LOWER_PLURAL__.
+     */
+    public function viewAny(User $user): bool
+    {
+        return $user->isAdmin() || $user->hasPermissionTo('manage.__CRUD_KEBAB_PLURAL__');
+    }
+
+    /**
+     * Determine whether the user can view the __CRUD_LOWER_SINGULAR__.
+     */
+    public function view(User $user, __CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): bool
+    {
+        return $user->isAdmin() || $user->hasPermissionTo('manage.__CRUD_KEBAB_PLURAL__');
+    }
+
+    /**
+     * Determine whether the user can create __CRUD_LOWER_PLURAL__.
+     */
+    public function create(User $user): bool
+    {
+        return $user->isAdmin() || $user->hasPermissionTo('manage.__CRUD_KEBAB_PLURAL__');
+    }
+
+    /**
+     * Determine whether the user can update the __CRUD_LOWER_SINGULAR__.
+     */
+    public function update(User $user, __CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): bool
+    {
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.__CRUD_KEBAB_PLURAL__'))
+            && ! $this->trashed($__CRUD_CAMEL_SINGULAR__);
+    }
+
+    /**
+     * Determine whether the user can delete the __CRUD_LOWER_SINGULAR__.
+     */
+    public function delete(User $user, __CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): bool
+    {
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.__CRUD_KEBAB_PLURAL__'))
+            && ! $this->trashed($__CRUD_CAMEL_SINGULAR__);
+    }
+
+    /**
+     * Determine whether the user can view trashed __CRUD_LOWER_PLURAL__.
+     */
+    public function viewAnyTrash(User $user): bool
+    {
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.__CRUD_KEBAB_PLURAL__'))
+            && $this->hasSoftDeletes();
+    }
+
+    /**
+     * Determine whether the user can view the trashed __CRUD_LOWER_SINGULAR__.
+     */
+    public function viewTrash(User $user, __CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): bool
+    {
+        return $this->view($user, $__CRUD_CAMEL_SINGULAR__) && $__CRUD_CAMEL_SINGULAR__->trashed();
+    }
+
+    /**
+     * Determine whether the user can restore the __CRUD_CAMEL_SINGULAR__.
+     */
+    public function restore(User $user, __CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): bool
+    {
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.__CRUD_KEBAB_PLURAL__'))
+            && $this->trashed($__CRUD_CAMEL_SINGULAR__);
+    }
+
+    /**
+     * Determine whether the user can permanently delete the __CRUD_CAMEL_SINGULAR__.
+     */
+    public function forceDelete(User $user, __CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): bool
+    {
+        return ($user->isAdmin() || $user->hasPermissionTo('manage.__CRUD_KEBAB_PLURAL__'))
+            && $this->trashed($__CRUD_CAMEL_SINGULAR__)
+            && Settings::get('delete_forever');
+    }
+
+    /**
+     * Determine wither the given __CRUD_CAMEL_SINGULAR__ is trashed.
+     */
+    public function trashed(__CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): bool
+    {
+        return $this->hasSoftDeletes() && method_exists($__CRUD_CAMEL_SINGULAR__, 'trashed') && $__CRUD_CAMEL_SINGULAR__->trashed();
+    }
+
+    /**
+     * Determine wither the __CRUD_LOWER_SINGULAR__ use soft deleting trait.
+     */
+    public function hasSoftDeletes(): bool
+    {
+        return in_array(
+            SoftDeletes::class,
+            array_keys((new \ReflectionClass(__CRUD_STUDLY_SINGULAR__::class))->getTraits())
+        );
+    }
+}

@@ -1,0 +1,34 @@
+<x-layout :title="$__CRUD_CAMEL_SINGULAR__->name" :breadcrumbs="['dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__]">
+    <div class="row">
+        <div class="col-md-6">
+            @component('dashboard::components.box')
+                @slot('class', 'p-0')
+                @slot('bodyClass', 'p-0')
+
+                <table class="table table-striped table-middle">
+                    <tbody>
+                    <tr>
+                        <th width="200">@lang('__CRUD_KEBAB_PLURAL__.attributes.name')</th>
+                        <td>{{ $__CRUD_CAMEL_SINGULAR__->name }}</td>
+                    </tr>
+                    @if($__CRUD_CAMEL_SINGULAR__->getFirstMedia())
+                    <tr>
+                        <th width="200">@lang('__CRUD_KEBAB_PLURAL__.attributes.image')</th>
+                        <td>
+                            <file-preview :media="{{ $__CRUD_CAMEL_SINGULAR__->getMediaResource() }}"></file-preview>
+                        </td>
+                    </tr>
+                    @endif
+                    </tbody>
+                </table>
+
+                @slot('footer')
+                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.edit')
+                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.delete')
+                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.restore')
+                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.forceDelete')
+                @endslot
+            @endcomponent
+        </div>
+    </div>
+</x-layout>

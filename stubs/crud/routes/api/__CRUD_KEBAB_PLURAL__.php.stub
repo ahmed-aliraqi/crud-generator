@@ -1,0 +1,6 @@
+<?php
+
+use App\Http\Controllers\Api\__CRUD_STUDLY_SINGULAR__Controller;
+
+Route::apiResource('__CRUD_KEBAB_PLURAL__', __CRUD_STUDLY_SINGULAR__Controller::class);
+Route::get('/select/__CRUD_KEBAB_PLURAL__', [__CRUD_STUDLY_SINGULAR__Controller::class, 'select'])->name('__CRUD_KEBAB_PLURAL__.select');

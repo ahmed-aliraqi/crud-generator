@@ -1,0 +1,13 @@
+@if($__CRUD_CAMEL_SINGULAR__)
+    @if(method_exists($__CRUD_CAMEL_SINGULAR__, 'trashed') && $__CRUD_CAMEL_SINGULAR__->trashed())
+        <a href="{{ route('dashboard.__CRUD_KEBAB_PLURAL__.trashed.show', $__CRUD_CAMEL_SINGULAR__) }}" class="text-decoration-none text-ellipsis">
+            {{ $__CRUD_CAMEL_SINGULAR__->name }}
+        </a>
+    @else
+        <a href="{{ route('dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__) }}" class="text-decoration-none text-ellipsis">
+            {{ $__CRUD_CAMEL_SINGULAR__->name }}
+        </a>
+    @endif
+@else
+    ---
+@endif

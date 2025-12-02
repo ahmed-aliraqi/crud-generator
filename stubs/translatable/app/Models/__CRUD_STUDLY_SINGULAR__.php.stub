@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Models;
+
+use AhmedAliraqi\LaravelFilterable\Filterable;
+use App\Http\Filters\__CRUD_STUDLY_SINGULAR__Filter;
+use App\Support\Traits\Selectable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Astrotomic\Translatable\Translatable;
+use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
+
+class __CRUD_STUDLY_SINGULAR__ extends Model implements TranslatableContract
+{
+    use Filterable;
+    use HasFactory;
+    use Selectable;
+    use Translatable;
+
+    /**
+     * The filter class used for querying this model.
+     *
+     * @var class-string<__CRUD_STUDLY_SINGULAR__Filter>
+     */
+    protected string $filter = __CRUD_STUDLY_SINGULAR__Filter::class;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'name',
+    ];
+
+    /**
+     * The translated attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    public $translatedAttributes = ['name'];
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array<int, string>
+     */
+    protected $with = [
+        'translations',
+    ];
+}

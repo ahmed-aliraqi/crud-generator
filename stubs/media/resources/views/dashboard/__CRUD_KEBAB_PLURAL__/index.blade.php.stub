@@ -1,0 +1,67 @@
+<x-layout :title="__('__CRUD_KEBAB_PLURAL__.plural')" :breadcrumbs="['dashboard.__CRUD_KEBAB_PLURAL__.index']">
+    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.filter')
+
+    @component('dashboard::components.table-box')
+        @slot('title')
+            @lang('__CRUD_KEBAB_PLURAL__.actions.list') ({{ $__CRUD_CAMEL_PLURAL__->total() }})
+        @endslot
+
+        <thead>
+        <tr>
+          <th colspan="100">
+            <div class="d-flex">
+                <x-check-all-delete
+                        type="{{ \App\Models\__CRUD_STUDLY_SINGULAR__::class }}"
+                        :resource="__('__CRUD_KEBAB_PLURAL__.plural')"></x-check-all-delete>
+
+                <div class="ml-2 d-flex justify-content-between flex-grow-1">
+                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.create')
+                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.trashed')
+                </div>
+            </div>
+          </th>
+        </tr>
+        <tr>
+            <th style="width: 30px;" class="text-center">
+              <x-check-all></x-check-all>
+            </th>
+            <th>@lang('__CRUD_KEBAB_PLURAL__.attributes.name')</th>
+            <th style="width: 160px">...</th>
+        </tr>
+        </thead>
+        <tbody>
+        @forelse($__CRUD_CAMEL_PLURAL__ as $__CRUD_CAMEL_SINGULAR__)
+            <tr>
+                <td class="text-center">
+                  <x-check-all-item :model="$__CRUD_CAMEL_SINGULAR__"></x-check-all-item>
+                </td>
+                <td>
+                    <a href="{{ route('dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__) }}"
+                       class="text-decoration-none text-ellipsis">
+
+                        <img src="{{ $__CRUD_CAMEL_SINGULAR__->getFirstMediaUrl() }}"
+                             alt="{{ __('__CRUD_KEBAB_PLURAL__.singular') }}"
+                             class="img-circle img-size-32 mr-2" style="height: 32px;">
+                        {{ $__CRUD_CAMEL_SINGULAR__->name }}
+                    </a>
+                </td>
+
+                <td style="width: 160px">
+                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.show')
+                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.edit')
+                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.delete')
+                </td>
+            </tr>
+        @empty
+            <tr>
+                <td colspan="100" class="text-center">@lang('__CRUD_KEBAB_PLURAL__.empty')</td>
+            </tr>
+        @endforelse
+
+        @if($__CRUD_CAMEL_PLURAL__->hasPages())
+            @slot('footer')
+                {{ $__CRUD_CAMEL_PLURAL__->links() }}
+            @endslot
+        @endif
+    @endcomponent
+</x-layout>

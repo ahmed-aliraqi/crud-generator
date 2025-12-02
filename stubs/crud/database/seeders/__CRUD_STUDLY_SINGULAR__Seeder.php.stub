@@ -1,0 +1,19 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\__CRUD_STUDLY_SINGULAR__;
+use Illuminate\Database\Seeder;
+
+class __CRUD_STUDLY_SINGULAR__Seeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        __CRUD_STUDLY_SINGULAR__::factory()->count(3)->create();
+    }
+}

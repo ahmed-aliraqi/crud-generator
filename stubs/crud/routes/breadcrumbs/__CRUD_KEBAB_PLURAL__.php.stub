@@ -1,0 +1,26 @@
+<?php
+
+Breadcrumbs::for('dashboard.__CRUD_KEBAB_PLURAL__.index', function ($breadcrumb) {
+    $breadcrumb->parent('dashboard.home');
+    $breadcrumb->push(__('__CRUD_KEBAB_PLURAL__.plural'), route('dashboard.__CRUD_KEBAB_PLURAL__.index'));
+});
+
+Breadcrumbs::for('dashboard.__CRUD_KEBAB_PLURAL__.trashed', function ($breadcrumb) {
+    $breadcrumb->parent('dashboard.__CRUD_KEBAB_PLURAL__.index');
+    $breadcrumb->push(__('__CRUD_KEBAB_PLURAL__.trashed'), route('dashboard.__CRUD_KEBAB_PLURAL__.trashed'));
+});
+
+Breadcrumbs::for('dashboard.__CRUD_KEBAB_PLURAL__.create', function ($breadcrumb) {
+    $breadcrumb->parent('dashboard.__CRUD_KEBAB_PLURAL__.index');
+    $breadcrumb->push(__('__CRUD_KEBAB_PLURAL__.actions.create'), route('dashboard.__CRUD_KEBAB_PLURAL__.create'));
+});
+
+Breadcrumbs::for('dashboard.__CRUD_KEBAB_PLURAL__.show', function ($breadcrumb, $__CRUD_CAMEL_SINGULAR__) {
+    $breadcrumb->parent('dashboard.__CRUD_KEBAB_PLURAL__.index');
+    $breadcrumb->push($__CRUD_CAMEL_SINGULAR__->name ?: '#' . $__CRUD_CAMEL_SINGULAR__->id, route('dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__));
+});
+
+Breadcrumbs::for('dashboard.__CRUD_KEBAB_PLURAL__.edit', function ($breadcrumb, $__CRUD_CAMEL_SINGULAR__) {
+    $breadcrumb->parent('dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__);
+    $breadcrumb->push(__('__CRUD_KEBAB_PLURAL__.actions.edit'), route('dashboard.__CRUD_KEBAB_PLURAL__.edit', $__CRUD_CAMEL_SINGULAR__));
+});

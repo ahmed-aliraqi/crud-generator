@@ -1,0 +1,6 @@
+@can('create', \App\Models\__CRUD_STUDLY_SINGULAR__::class)
+    <a href="{{ route('dashboard.__CRUD_KEBAB_PLURAL__.create') }}" class="btn btn-outline-success btn-sm">
+        <i class="fas fa fa-fw fa-plus"></i>
+        @lang('__CRUD_KEBAB_PLURAL__.actions.create')
+    </a>
+@endcan

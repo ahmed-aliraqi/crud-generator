@@ -1,0 +1,200 @@
+<?php
+
+namespace Tests\Feature\Dashboard;
+
+use App\Models\__CRUD_STUDLY_SINGULAR__;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class __CRUD_STUDLY_SINGULAR__Test extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_it_can_display_a_list_of___CRUD_SNAKE_PLURAL__()
+    {
+        $this->actingAsAdmin();
+
+        __CRUD_STUDLY_SINGULAR__::factory()->create(['name' => 'Foo']);
+
+        $this->get(route('dashboard.__CRUD_KEBAB_PLURAL__.index'))
+            ->assertSuccessful()
+            ->assertSee('Foo');
+    }
+
+    public function test_it_can_display_the___CRUD_SNAKE_SINGULAR___details()
+    {
+        $this->actingAsAdmin();
+
+        $__CRUD_CAMEL_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::factory()->create(['name' => 'Foo']);
+
+        $this->get(route('dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__))
+            ->assertSuccessful()
+            ->assertSee('Foo');
+    }
+
+    public function test_it_can_display___CRUD_SNAKE_PLURAL___create_form()
+    {
+        $this->actingAsAdmin();
+
+        $this->get(route('dashboard.__CRUD_KEBAB_PLURAL__.create'))
+            ->assertSuccessful();
+    }
+
+    public function test_it_can_create_a_new___CRUD_SNAKE_SINGULAR__()
+    {
+        $this->actingAsAdmin();
+
+        $__CRUD_CAMEL_PLURAL__Count = __CRUD_STUDLY_SINGULAR__::count();
+
+        $response = $this->post(
+            route('dashboard.__CRUD_KEBAB_PLURAL__.store'),
+            __CRUD_STUDLY_SINGULAR__::factory()->raw([
+                'name' => 'Foo',
+            ])
+        );
+
+        $response->assertRedirect();
+
+        $__CRUD_CAMEL_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::all()->last();
+
+        $this->assertEquals(__CRUD_STUDLY_SINGULAR__::count(), $__CRUD_CAMEL_PLURAL__Count + 1);
+
+        $this->assertEquals($__CRUD_CAMEL_SINGULAR__->name, 'Foo');
+    }
+
+    public function test_it_can_display_the___CRUD_SNAKE_PLURAL___edit_form()
+    {
+        $this->actingAsAdmin();
+
+        $__CRUD_CAMEL_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::factory()->create();
+
+        $this->get(route('dashboard.__CRUD_KEBAB_PLURAL__.edit', $__CRUD_CAMEL_SINGULAR__))
+            ->assertSuccessful();
+    }
+
+    public function test_it_can_update_the___CRUD_SNAKE_SINGULAR__()
+    {
+        $this->actingAsAdmin();
+
+        $__CRUD_CAMEL_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::factory()->create();
+
+        $response = $this->put(
+            route('dashboard.__CRUD_KEBAB_PLURAL__.update', $__CRUD_CAMEL_SINGULAR__),
+            __CRUD_STUDLY_SINGULAR__::factory()->raw([
+                'name' => 'Foo',
+            ])
+        );
+
+        $__CRUD_CAMEL_SINGULAR__->refresh();
+
+        $response->assertRedirect();
+
+        $this->assertEquals($__CRUD_CAMEL_SINGULAR__->name, 'Foo');
+    }
+
+    public function test_it_can_delete_the___CRUD_SNAKE_SINGULAR__()
+    {
+        $this->actingAsAdmin();
+
+        $__CRUD_CAMEL_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::factory()->create();
+
+        $__CRUD_CAMEL_PLURAL__Count = __CRUD_STUDLY_SINGULAR__::count();
+
+        $response = $this->delete(route('dashboard.__CRUD_KEBAB_PLURAL__.destroy', $__CRUD_CAMEL_SINGULAR__));
+
+        $response->assertRedirect();
+
+        $this->assertEquals(__CRUD_STUDLY_SINGULAR__::count(), $__CRUD_CAMEL_PLURAL__Count - 1);
+    }
+
+    public function test_it_can_display_trashed___CRUD_SNAKE_PLURAL__()
+    {
+        if (! $this->useSoftDeletes($model = __CRUD_STUDLY_SINGULAR__::class)) {
+            $this->markTestSkipped("The '$model' doesn't use soft deletes trait.");
+        }
+
+        __CRUD_STUDLY_SINGULAR__::factory()->create(['deleted_at' => now(), 'name' => 'Ahmed']);
+
+        $this->actingAsAdmin();
+
+        $response = $this->get(route('dashboard.__CRUD_KEBAB_PLURAL__.trashed'));
+
+        $response->assertSuccessful();
+
+        $response->assertSee('Ahmed');
+    }
+
+    public function test_it_can_display_trashed___CRUD_SNAKE_SINGULAR___details()
+    {
+        if (! $this->useSoftDeletes($model = __CRUD_STUDLY_SINGULAR__::class)) {
+            $this->markTestSkipped("The '$model' doesn't use soft deletes trait.");
+        }
+
+        $__CRUD_CAMEL_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::factory()->create(['deleted_at' => now(), 'name' => 'Ahmed']);
+
+        $this->actingAsAdmin();
+
+        $response = $this->get(route('dashboard.__CRUD_KEBAB_PLURAL__.trashed.show', $__CRUD_CAMEL_SINGULAR__));
+
+        $response->assertSuccessful();
+
+        $response->assertSee('Ahmed');
+    }
+
+    public function test_it_can_restore_deleted___CRUD_SNAKE_SINGULAR__()
+    {
+        if (! $this->useSoftDeletes($model = __CRUD_STUDLY_SINGULAR__::class)) {
+            $this->markTestSkipped("The '$model' doesn't use soft deletes trait.");
+        }
+
+        $__CRUD_CAMEL_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::factory()->create(['deleted_at' => now()]);
+
+        $this->actingAsAdmin();
+
+        $response = $this->post(route('dashboard.__CRUD_KEBAB_PLURAL__.restore', $__CRUD_CAMEL_SINGULAR__));
+
+        $response->assertRedirect();
+
+        $this->assertNull($__CRUD_CAMEL_SINGULAR__->refresh()->deleted_at);
+    }
+
+    public function test_it_can_force_delete___CRUD_SNAKE_SINGULAR__()
+    {
+        if (! $this->useSoftDeletes($model = __CRUD_STUDLY_SINGULAR__::class)) {
+            $this->markTestSkipped("The '$model' doesn't use soft deletes trait.");
+        }
+
+        $__CRUD_CAMEL_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::factory()->create(['deleted_at' => now()]);
+
+        $visitorCount = __CRUD_STUDLY_SINGULAR__::withTrashed()->count();
+
+        $this->actingAsAdmin();
+
+        $response = $this->delete(route('dashboard.__CRUD_KEBAB_PLURAL__.forceDelete', $__CRUD_CAMEL_SINGULAR__));
+
+        $response->assertRedirect();
+
+        $this->assertEquals(__CRUD_STUDLY_SINGULAR__::withoutTrashed()->count(), $visitorCount - 1);
+    }
+
+    public function test_it_can_filter___CRUD_SNAKE_PLURAL___by_name()
+    {
+        $this->actingAsAdmin();
+
+        __CRUD_STUDLY_SINGULAR__::factory()->create([
+            'name' => 'Foo',
+        ]);
+
+        __CRUD_STUDLY_SINGULAR__::factory()->create([
+            'name' => 'Bar',
+        ]);
+
+        $this->get(route('dashboard.__CRUD_KEBAB_PLURAL__.index', [
+            'name' => 'Fo',
+        ]))
+            ->assertSuccessful()
+            ->assertSee(__('__CRUD_KEBAB_PLURAL__.filter'))
+            ->assertSee('Foo')
+            ->assertDontSee('Bar');
+    }
+}

@@ -10,9 +10,11 @@
     }
   ],
   "require": {
-    "php": ">=8.0",
+    "php": ">=8.2",
     "illuminate/support": ">=9.0",
-    "illuminate/console": ">=9.0"
+    "illuminate/console": ">=9.0",
+    "laravel-modules/module-generator": "^3.2",
+    "laravel/prompts": "^0.3.8"
   },
   "autoload": {
     "psr-4": {

@@ -1,0 +1,26 @@
+@include('dashboard.errors')
+
+{{ BsForm::text('name') }}
+
+@isset($__CRUD_CAMEL_SINGULAR__)
+<file-uploader :media="{{ $__CRUD_CAMEL_SINGULAR__->getMediaResource() }}"
+               name="image"
+               :max="1"
+               collection="default"
+               :tokens="{{ json_encode(old('image', [])) }}"
+               label="{{ __('__CRUD_KEBAB_PLURAL__.attributes.image') }}"
+               notes="Supported types: jpeg, png,jpg,gif"
+               accept="image/jpeg,image/png,image/jpg,image/gif"
+></file-uploader>
+@else
+<file-uploader
+        :media="[]"
+        name="image"
+        :max="1"
+        collection="default"
+        :tokens="{{ json_encode(old('image', [])) }}"
+        label="{{ __('__CRUD_KEBAB_PLURAL__.attributes.image') }}"
+        notes="Supported types: jpeg, png,jpg,gif"
+        accept="image/jpeg,image/png,image/jpg,image/gif"
+></file-uploader>
+@endisset

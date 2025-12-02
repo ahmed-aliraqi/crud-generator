@@ -7,47 +7,6 @@ use Spatie\Permission\Models\Permission;
 
 class Modifier
 {
-    public static function routes($name)
-    {
-        $pattern = '\/\*  The routes of generated crud will set here: Don\'t remove this line  \*\/';
-
-        $dashboard = file_get_contents(base_path('routes/dashboard.php'));
-
-        $api = file_get_contents(base_path('routes/api.php'));
-
-        $controllerName = Str::of($name)->singular()->studly().'Controller';
-
-        $resource = Str::of($name)->plural()->snake();
-
-        $singular = $resource->singular();
-        $studly = $resource->plural()->studly();
-
-        $dashboardRoute = <<<DASHBOARD
-// $studly Routes.
-Route::get('trashed/$resource', '$controllerName@trashed')->name('$resource.trashed');
-Route::get('trashed/$resource/{trashed_$singular}', '$controllerName@showTrashed')->name('$resource.trashed.show');
-Route::post('$resource/{trashed_$singular}/restore', '$controllerName@restore')->name('$resource.restore');
-Route::delete('$resource/{trashed_$singular}/forceDelete', '$controllerName@forceDelete')->name('$resource.forceDelete');
-Route::resource('$resource', '$controllerName');
-
-/*  The routes of generated crud will set here: Don't remove this line  */
-DASHBOARD;
-
-        $apiRoutes = <<<API
-// $studly Routes.
-Route::apiResource('$resource', '$controllerName');
-Route::get('/select/$resource', '$controllerName@select')->name('$resource.select');
-
-/*  The routes of generated crud will set here: Don't remove this line  */
-API;
-        $dashboard = preg_replace("/$pattern/", $dashboardRoute, $dashboard);
-
-        $api = preg_replace("/$pattern/", $apiRoutes, $api);
-
-        file_put_contents(base_path('routes/dashboard.php'), $dashboard);
-
-        file_put_contents(base_path('routes/api.php'), $api);
-    }
 
     public function sidebar($name)
     {

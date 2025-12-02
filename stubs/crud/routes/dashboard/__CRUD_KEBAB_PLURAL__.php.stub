@@ -1,0 +1,9 @@
+<?php
+
+use App\Http\Controllers\Dashboard\__CRUD_STUDLY_SINGULAR__Controller;
+
+Route::get('trashed/__CRUD_KEBAB_PLURAL__', [__CRUD_STUDLY_SINGULAR__Controller::class, 'trashed'])->name('__CRUD_KEBAB_PLURAL__.trashed');
+Route::get('trashed/__CRUD_KEBAB_PLURAL__/{trashed___CRUD_SNAKE_SINGULAR__}', [__CRUD_STUDLY_SINGULAR__Controller::class, 'showTrashed'])->name('__CRUD_KEBAB_PLURAL__.trashed.show');
+Route::post('__CRUD_KEBAB_PLURAL__/{trashed___CRUD_SNAKE_SINGULAR__}/restore', [__CRUD_STUDLY_SINGULAR__Controller::class, 'restore'])->name('__CRUD_KEBAB_PLURAL__.restore');
+Route::delete('__CRUD_KEBAB_PLURAL__/{trashed___CRUD_SNAKE_SINGULAR__}/forceDelete', [__CRUD_STUDLY_SINGULAR__Controller::class, 'forceDelete'])->name('__CRUD_KEBAB_PLURAL__.forceDelete');
+Route::resource('__CRUD_KEBAB_PLURAL__', __CRUD_STUDLY_SINGULAR__Controller::class);

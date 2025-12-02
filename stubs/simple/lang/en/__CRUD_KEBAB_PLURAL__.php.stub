@@ -1,0 +1,55 @@
+<?php
+
+return [
+    'singular' => '__CRUD_TITLE_SINGULAR__',
+    'plural' => '__CRUD_TITLE_PLURAL__',
+    'empty' => 'There are no __CRUD_LOWER_PLURAL__ yet.',
+    'count' => '__CRUD_UCFIRST_PLURAL__ count.',
+    'search' => 'Search',
+    'select' => 'Select __CRUD_UCFIRST_SINGULAR__',
+    'permission' => 'Manage __CRUD_LOWER_PLURAL__',
+    'trashed' => 'Trashed __CRUD_LOWER_PLURAL__',
+    'perPage' => 'Results per page',
+    'filter' => 'Search for __CRUD_LOWER_SINGULAR__',
+    'actions' => [
+        'list' => 'List all',
+        'create' => 'Create a new __CRUD_LOWER_SINGULAR__',
+        'show' => 'Show __CRUD_LOWER_SINGULAR__',
+        'edit' => 'Edit __CRUD_LOWER_SINGULAR__',
+        'delete' => 'Delete __CRUD_LOWER_SINGULAR__',
+        'restore' => 'Restore',
+        'forceDelete' => 'Delete Forever',
+        'options' => 'Options',
+        'save' => 'Save',
+        'filter' => 'Filter',
+    ],
+    'messages' => [
+        'created' => 'The __CRUD_LOWER_SINGULAR__ has been created successfully.',
+        'updated' => 'The __CRUD_LOWER_SINGULAR__ has been updated successfully.',
+        'deleted' => 'The __CRUD_LOWER_SINGULAR__ has been deleted successfully.',
+        'restored' => 'The __CRUD_LOWER_SINGULAR__ has been restored successfully.',
+    ],
+    'attributes' => [
+        'name' => '__CRUD_UCFIRST_PLURAL__ name',
+    ],
+    'dialogs' => [
+        'delete' => [
+            'title' => 'Warning !',
+            'info' => 'Are you sure you want to delete the __CRUD_LOWER_SINGULAR__ ?',
+            'confirm' => 'Delete',
+            'cancel' => 'Cancel',
+        ],
+        'restore' => [
+            'title' => 'Warning !',
+            'info' => 'Are you sure you want to restore the __CRUD_LOWER_SINGULAR__ ?',
+            'confirm' => 'Restore',
+            'cancel' => 'Cancel',
+        ],
+        'forceDelete' => [
+            'title' => 'Warning !',
+            'info' => 'Are you sure you want to delete the __CRUD_LOWER_SINGULAR__ forever ?',
+            'confirm' => 'Delete Forever',
+            'cancel' => 'Cancel',
+        ],
+    ],
+];

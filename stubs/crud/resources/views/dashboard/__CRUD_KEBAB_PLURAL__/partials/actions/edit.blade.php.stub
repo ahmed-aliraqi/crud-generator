@@ -1,0 +1,5 @@
+@can('update', $__CRUD_CAMEL_SINGULAR__)
+    <a href="{{ route('dashboard.__CRUD_KEBAB_PLURAL__.edit', $__CRUD_CAMEL_SINGULAR__) }}" class="btn btn-outline-primary btn-sm">
+        <i class="fas fa fa-fw fa-edit"></i>
+    </a>
+@endcan

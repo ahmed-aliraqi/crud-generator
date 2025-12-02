@@ -1,0 +1,22 @@
+@component('dashboard::components.sidebarItem')
+    @slot('can', ['ability' => 'viewAny', 'model' => \App\Models\__CRUD_STUDLY_SINGULAR__::class])
+    @slot('url', route('dashboard.__CRUD_KEBAB_PLURAL__.index'))
+    @slot('name', __('__CRUD_KEBAB_PLURAL__.plural'))
+    @slot('active', request()->routeIs('*__CRUD_KEBAB_PLURAL__*'))
+    @slot('icon', 'fas fa-th')
+    @slot('tree', [
+        [
+            'name' => __('__CRUD_KEBAB_PLURAL__.actions.list'),
+            'url' => route('dashboard.__CRUD_KEBAB_PLURAL__.index'),
+            'can' => ['ability' => 'viewAny', 'model' => \App\Models\__CRUD_STUDLY_SINGULAR__::class],
+            'active' => request()->routeIs('*__CRUD_KEBAB_PLURAL__.index')
+            || request()->routeIs('*__CRUD_KEBAB_PLURAL__.show'),
+        ],
+        [
+            'name' => __('__CRUD_KEBAB_PLURAL__.actions.create'),
+            'url' => route('dashboard.__CRUD_KEBAB_PLURAL__.create'),
+            'can' => ['ability' => 'create', 'model' => \App\Models\__CRUD_STUDLY_SINGULAR__::class],
+            'active' => request()->routeIs('*__CRUD_KEBAB_PLURAL__.create'),
+        ],
+    ])
+@endcomponent

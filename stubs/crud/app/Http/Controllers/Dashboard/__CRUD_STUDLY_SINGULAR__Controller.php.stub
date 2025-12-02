@@ -1,0 +1,143 @@
+<?php
+
+namespace App\Http\Controllers\Dashboard;
+
+use App\Http\Requests\Dashboard\__CRUD_STUDLY_SINGULAR__Request;
+use App\Models\__CRUD_STUDLY_SINGULAR__;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Routing\Controller;
+use Illuminate\Contracts\View\View;
+
+class __CRUD_STUDLY_SINGULAR__Controller extends Controller
+{
+    use AuthorizesRequests, ValidatesRequests;
+
+    public function __construct()
+    {
+        $this->authorizeResource(__CRUD_STUDLY_SINGULAR__::class, '__CRUD_SNAKE_SINGULAR__');
+    }
+
+    /**
+     * Display a listing of the __CRUD_LOWER_PLURAL__.
+     */
+    public function index(): View
+    {
+        $__CRUD_CAMEL_PLURAL__ = __CRUD_STUDLY_SINGULAR__::filter()->latest()->paginate();
+
+        return view('dashboard.__CRUD_KEBAB_PLURAL__.index', compact('__CRUD_CAMEL_PLURAL__'));
+    }
+
+    /**
+     * Show the form for creating a new __CRUD_LOWER_SINGULAR__.
+     */
+    public function create(): View
+    {
+        return view('dashboard.__CRUD_KEBAB_PLURAL__.create');
+    }
+
+    /**
+     * Store a newly created __CRUD_LOWER_SINGULAR__ in storage.
+     */
+    public function store(__CRUD_STUDLY_SINGULAR__Request $request): RedirectResponse
+    {
+        $__CRUD_CAMEL_SINGULAR__ = __CRUD_STUDLY_SINGULAR__::create($request->all());
+
+        flash()->success(__('__CRUD_KEBAB_PLURAL__.messages.created'));
+
+        return redirect()->route('dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__);
+    }
+
+    /**
+     * Display the specified __CRUD_LOWER_SINGULAR__.
+     */
+    public function show(__CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): View
+    {
+        return view('dashboard.__CRUD_KEBAB_PLURAL__.show', compact('__CRUD_CAMEL_SINGULAR__'));
+    }
+
+    /**
+     * Show the form for editing the specified __CRUD_LOWER_SINGULAR__.
+     */
+    public function edit(__CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): View
+    {
+        return view('dashboard.__CRUD_KEBAB_PLURAL__.edit', compact('__CRUD_CAMEL_SINGULAR__'));
+    }
+
+    /**
+     * Update the specified __CRUD_LOWER_SINGULAR__ in storage.
+     */
+    public function update(
+        __CRUD_STUDLY_SINGULAR__Request $request,
+        __CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__
+    ): RedirectResponse {
+        $__CRUD_CAMEL_SINGULAR__->update($request->all());
+
+        flash()->success(__('__CRUD_KEBAB_PLURAL__.messages.updated'));
+
+        return redirect()->route('dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__);
+    }
+
+    /**
+     * Remove the specified __CRUD_LOWER_SINGULAR__ from storage.
+     */
+    public function destroy(__CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): RedirectResponse
+    {
+        $__CRUD_CAMEL_SINGULAR__->delete();
+
+        flash()->success(__('__CRUD_KEBAB_PLURAL__.messages.deleted'));
+
+        return redirect()->route('dashboard.__CRUD_KEBAB_PLURAL__.index');
+    }
+
+    /**
+     * Display a listing of the trashed __CRUD_LOWER_PLURAL__.
+     */
+    public function trashed(): View
+    {
+        $this->authorize('viewAnyTrash', __CRUD_STUDLY_SINGULAR__::class);
+
+        $__CRUD_CAMEL_PLURAL__ = __CRUD_STUDLY_SINGULAR__::onlyTrashed()->latest('deleted_at')->paginate();
+
+        return view('dashboard.__CRUD_KEBAB_PLURAL__.trashed', compact('__CRUD_CAMEL_PLURAL__'));
+    }
+
+    /**
+     * Display the specified trashed __CRUD_LOWER_SINGULAR__.
+     */
+    public function showTrashed(__CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): View
+    {
+        $this->authorize('viewTrash', $__CRUD_CAMEL_SINGULAR__);
+
+        return view('dashboard.__CRUD_KEBAB_PLURAL__.show', compact('__CRUD_CAMEL_SINGULAR__'));
+    }
+
+    /**
+     * Restore the trashed __CRUD_LOWER_SINGULAR__.
+     */
+    public function restore(__CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): RedirectResponse
+    {
+        $this->authorize('restore', $__CRUD_CAMEL_SINGULAR__);
+
+        $__CRUD_CAMEL_SINGULAR__->restore();
+
+        flash()->success(__('__CRUD_KEBAB_PLURAL__.messages.restored'));
+
+        return redirect()->route('dashboard.__CRUD_KEBAB_PLURAL__.trashed');
+    }
+
+    /**
+     * Force delete the specified __CRUD_LOWER_SINGULAR__ from storage.
+     */
+    public function forceDelete(__CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): RedirectResponse
+    {
+        $this->authorize('forceDelete', $__CRUD_CAMEL_SINGULAR__);
+
+        $__CRUD_CAMEL_SINGULAR__->forceDelete();
+
+        flash()->success(__('__CRUD_KEBAB_PLURAL__.messages.deleted'));
+
+        return redirect()->route('dashboard.__CRUD_KEBAB_PLURAL__.trashed');
+    }
+}

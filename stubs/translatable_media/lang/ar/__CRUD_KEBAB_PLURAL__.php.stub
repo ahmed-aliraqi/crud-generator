@@ -1,0 +1,57 @@
+<?php
+
+return [
+    'singular' => '__AR_SINGULAR1__',
+    'plural' => '__AR_PLURAL1__',
+    'empty' => 'لا يوجد __AR_PLURAL2__ حتى الان',
+    'count' => 'عدد __AR_PLURAL1__',
+    'search' => 'بحث',
+    'select' => 'اختر __AR_SINGULAR1__',
+    'permission' => 'ادارة __AR_PLURAL1__',
+    'trashed' => '__AR_PLURAL1__ المحذوفة',
+    'perPage' => 'عدد النتائج بالصفحة',
+    'filter' => 'ابحث عن __AR_SINGULAR2__',
+    'actions' => [
+        'list' => 'عرض الكل',
+        'create' => 'اضافة __AR_SINGULAR2__',
+        'show' => 'عرض __AR_SINGULAR1__',
+        'edit' => 'تعديل __AR_SINGULAR1__',
+        'delete' => 'حذف __AR_SINGULAR1__',
+        'restore' => 'استعادة',
+        'forceDelete' => 'حذف نهائي',
+        'options' => 'خيارات',
+        'save' => 'حفظ',
+        'filter' => 'بحث',
+    ],
+    'messages' => [
+        'created' => 'تم اضافة __AR_SINGULAR1__ بنجاح.',
+        'updated' => 'تم تعديل __AR_SINGULAR1__ بنجاح.',
+        'deleted' => 'تم حذف __AR_SINGULAR1__ بنجاح.',
+        'restored' => 'تم استعادة __AR_SINGULAR1__ بنجاح.',
+    ],
+    'attributes' => [
+        'name' => 'اسم __AR_SINGULAR1__',
+        '%name%' => 'اسم __AR_SINGULAR1__',
+        'image' => 'الصورة',
+    ],
+    'dialogs' => [
+        'delete' => [
+            'title' => 'تحذير !',
+            'info' => 'هل انت متأكد انك تريد حذف __AR_SINGULAR1__ ؟',
+            'confirm' => 'حذف',
+            'cancel' => 'الغاء',
+        ],
+        'restore' => [
+            'title' => 'تحذير !',
+            'info' => 'هل انت متأكد انك تريد استعادة __AR_SINGULAR1__ ؟',
+            'confirm' => 'استعادة',
+            'cancel' => 'الغاء',
+        ],
+        'forceDelete' => [
+            'title' => 'تحذير !',
+            'info' => 'هل انت متأكد انك تريد حذف __AR_SINGULAR1__ نهائياً ؟',
+            'confirm' => 'حذف نهائي',
+            'cancel' => 'الغاء',
+        ],
+    ],
+];

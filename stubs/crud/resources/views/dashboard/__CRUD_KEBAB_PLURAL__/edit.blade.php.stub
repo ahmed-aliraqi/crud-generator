@@ -1,0 +1,13 @@
+<x-layout :title="$__CRUD_CAMEL_SINGULAR__->name" :breadcrumbs="['dashboard.__CRUD_KEBAB_PLURAL__.edit', $__CRUD_CAMEL_SINGULAR__]">
+    {{ BsForm::resource('__CRUD_KEBAB_PLURAL__')->putModel($__CRUD_CAMEL_SINGULAR__, route('dashboard.__CRUD_KEBAB_PLURAL__.update', $__CRUD_CAMEL_SINGULAR__)) }}
+    @component('dashboard::components.box')
+        @slot('title', __('__CRUD_KEBAB_PLURAL__.actions.edit'))
+
+        @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.form')
+
+        @slot('footer')
+            {{ BsForm::submit()->label(__('__CRUD_KEBAB_PLURAL__.actions.save')) }}
+        @endslot
+    @endcomponent
+    {{ BsForm::close() }}
+</x-layout>

@@ -1,0 +1,13 @@
+@if(method_exists($__CRUD_CAMEL_SINGULAR__, 'trashed') && $__CRUD_CAMEL_SINGULAR__->trashed())
+    @can('view', $__CRUD_CAMEL_SINGULAR__)
+        <a href="{{ route('dashboard.__CRUD_KEBAB_PLURAL__.trashed.show', $__CRUD_CAMEL_SINGULAR__) }}" class="btn btn-outline-dark btn-sm">
+            <i class="fas fa fa-fw fa-eye"></i>
+        </a>
+    @endcan
+@else
+    @can('view', $__CRUD_CAMEL_SINGULAR__)
+        <a href="{{ route('dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__) }}" class="btn btn-outline-dark btn-sm">
+            <i class="fas fa fa-fw fa-eye"></i>
+        </a>
+    @endcan
+@endif

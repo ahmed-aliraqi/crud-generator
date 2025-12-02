@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Resources\__CRUD_STUDLY_SINGULAR__Resource;
+use App\Http\Resources\SelectResource;
+use App\Models\__CRUD_STUDLY_SINGULAR__;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Routing\Controller;
+
+class __CRUD_STUDLY_SINGULAR__Controller extends Controller
+{
+    use AuthorizesRequests, ValidatesRequests;
+
+    /**
+     * Display a listing of the __CRUD_LOWER_PLURAL__.
+     */
+    public function index(): AnonymousResourceCollection
+    {
+        $__CRUD_CAMEL_PLURAL__ = __CRUD_STUDLY_SINGULAR__::filter()->simplePaginate();
+
+        return __CRUD_STUDLY_SINGULAR__Resource::collection($__CRUD_CAMEL_PLURAL__);
+    }
+
+    /**
+     * Display the specified __CRUD_LOWER_SINGULAR__.
+     */
+    public function show(__CRUD_STUDLY_SINGULAR__ $__CRUD_CAMEL_SINGULAR__): __CRUD_STUDLY_SINGULAR__Resource
+    {
+        return new __CRUD_STUDLY_SINGULAR__Resource($__CRUD_CAMEL_SINGULAR__);
+    }
+
+    /**
+     * Display a listing of the __CRUD_LOWER_PLURAL__.
+     */
+    public function select(): AnonymousResourceCollection
+    {
+        $__CRUD_CAMEL_PLURAL__ = __CRUD_STUDLY_SINGULAR__::filter()->simplePaginate();
+
+        return SelectResource::collection($__CRUD_CAMEL_PLURAL__);
+    }
+}

@@ -1,0 +1,6 @@
+@can('viewAnyTrash', \App\Models\__CRUD_STUDLY_SINGULAR__::class)
+    <a href="{{ route('dashboard.__CRUD_KEBAB_PLURAL__.trashed') }}" class="btn btn-outline-danger btn-sm">
+        <i class="fas fa fa-fw fa-trash"></i>
+        @lang('__CRUD_KEBAB_PLURAL__.trashed')
+    </a>
+@endcan
