@@ -26,10 +26,10 @@
         </tr>
         </thead>
         <tbody>
-        @forelse($__CRUD_CAMEL_PLURAL__ as __CRUD_CAMEL_SINGULAR__)
+        @forelse($__CRUD_CAMEL_PLURAL__ as $__CRUD_CAMEL_SINGULAR__)
             <tr>
                 <td class="text-center">
-                  <x-check-all-item :model="__CRUD_CAMEL_SINGULAR__"></x-check-all-item>
+                  <x-check-all-item :model="$__CRUD_CAMEL_SINGULAR__"></x-check-all-item>
                 </td>
                 <td>
                     <a href="{{ route('dashboard.__CRUD_KEBAB_PLURAL__.show', $__CRUD_CAMEL_SINGULAR__) }}"
