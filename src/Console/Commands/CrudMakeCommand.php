@@ -53,11 +53,6 @@ class CrudMakeCommand extends Command
                 file: resource_path('views/layouts/sidebar.blade.php'),
                 content: "@include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.sidebar')",
                 before: "@include('dashboard.settings.sidebar')",
-            )
-            ->appendToFile(
-                file: database_path('seeders/DummyDataSeeder.php'),
-                content: '$this->call(__CRUD_STUDLY_SINGULAR__Seeder::class);',
-                before: 'The seeders of generated crud',
             );
 
         $translateToArabic = confirm(
