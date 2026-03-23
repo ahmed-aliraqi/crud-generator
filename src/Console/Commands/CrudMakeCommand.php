@@ -79,6 +79,8 @@ class CrudMakeCommand extends Command
 
         app(Modifier::class)->softDeletes($name);
 
+        app(Modifier::class)->langGenerator($name);
+
         $langPath = 'simple';
 
         // Simple
