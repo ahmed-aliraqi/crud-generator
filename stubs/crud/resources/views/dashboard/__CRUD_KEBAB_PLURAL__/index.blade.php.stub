@@ -1,4 +1,5 @@
 <x-layout :title="__('__CRUD_KEBAB_PLURAL__.plural')" :breadcrumbs="['dashboard.__CRUD_KEBAB_PLURAL__.index']">
+    @include('dashboard.errors')
     @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.filter')
 
     @component('dashboard::components.table-box')
@@ -9,16 +10,20 @@
         <thead>
         <tr>
           <th colspan="100">
-            <div class="d-flex">
-                <x-check-all-delete
-                        type="{{ \App\Models\__CRUD_STUDLY_SINGULAR__::class }}"
-                        :resource="__('__CRUD_KEBAB_PLURAL__.plural')"></x-check-all-delete>
+              <div class="d-flex justify-content-between">
+                  <div class="d-flex" style="gap: .5rem">
+                      @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.create')
 
-                <div class="ml-2 d-flex justify-content-between flex-grow-1">
-                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.create')
-                    @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.trashed')
-                </div>
-            </div>
+                      <x-excel-export model="App\Models\__CRUD_STUDLY_SINGULAR__"></x-excel-export>
+                      <x-excel-import model="App\Models\__CRUD_STUDLY_SINGULAR__"></x-excel-import>
+                      @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.trashed')
+                  </div>
+                  <div>
+                      <x-check-all-delete
+                              type="{{ \App\Models\__CRUD_STUDLY_SINGULAR__::class }}"
+                              :resource="__('__CRUD_KEBAB_PLURAL__.plural')"></x-check-all-delete>
+                  </div>
+              </div>
           </th>
         </tr>
         <tr>
