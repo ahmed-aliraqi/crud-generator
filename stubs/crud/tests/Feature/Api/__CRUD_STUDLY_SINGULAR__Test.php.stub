@@ -57,7 +57,7 @@ class __CRUD_STUDLY_SINGULAR__Test extends TestCase
         $this->assertCount(5, $response->json('data'));
     }
 
-    public function test_it_can_display_the_visitor_details()
+    public function test_it_can_display_the__CRUD_SNAKE_SINGULAR__details()
     {
         $this->actingAsAdmin();
 
