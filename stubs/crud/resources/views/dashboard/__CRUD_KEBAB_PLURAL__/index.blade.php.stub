@@ -16,6 +16,7 @@
 
                       <x-excel-export model="App\Models\__CRUD_STUDLY_SINGULAR__"></x-excel-export>
                       <x-excel-import model="App\Models\__CRUD_STUDLY_SINGULAR__"></x-excel-import>
+                      <x-send-batch-email model="App\Models\__CRUD_STUDLY_SINGULAR__"></x-send-batch-email>
                       @include('dashboard.__CRUD_KEBAB_PLURAL__.partials.actions.trashed')
                   </div>
                   <div>
