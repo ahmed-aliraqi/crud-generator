@@ -71,22 +71,4 @@ SEEDER;
 
         file_put_contents(database_path('seeders/DummyDataSeeder.php'), $seederFile);
     }
-
-    public function langGenerator($name)
-    {
-        $resource = Str::of($name)->plural()->snake();
-
-        $pattern = '\/\*  The lang of generated crud will set here: Don\'t remove this line  \*\/';
-
-        $configFile = file_get_contents(config_path('lang-generator.php'));
-
-        $lang = <<<LANG
-'$resource' => base_path('lang/{lang}/$resource.php'),
-        /*  The lang of generated crud will set here: Don't remove this line  */
-LANG;
-
-        $configFile = preg_replace("/$pattern/", $lang, $configFile);
-
-        file_put_contents(config_path('lang-generator.php'), $configFile);
-    }
 }
